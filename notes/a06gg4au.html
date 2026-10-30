@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MVP student city</title>
+<meta name="description" content="город **для кого?**">
+<link rel="canonical" href="https://nourpups.github.io/obsidian-shared-notes/notes/a06gg4au.html">
+<meta property="og:url" content="https://nourpups.github.io/obsidian-shared-notes/notes/a06gg4au.html">
+
+<link rel="icon" type="image/png" href="https://cmdspace.work/assets/logos/cmds-logo-round.png">
+<link rel="apple-touch-icon" href="https://cmdspace.work/assets/logos/cmds-logo-round.png">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CMDSPACE">
+<meta property="og:title" content="MVP student city">
+<meta property="og:description" content="город **для кого?**">
+<meta property="og:image" content="https://share.cmdspace.work/assets/og/og-share.png">
+<meta property="og:image:secure_url" content="https://share.cmdspace.work/assets/og/og-share.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CMDS Share — MVP student city">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ko_KR">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MVP student city">
+<meta name="twitter:description" content="город **для кого?**">
+<meta name="twitter:image" content="https://share.cmdspace.work/assets/og/og-share.png">
+
+<script>
+(function(){try{var f='';if(f){document.documentElement.dataset.theme=f;return;}var t=localStorage.getItem('cmds-theme');if(t){document.documentElement.dataset.theme=t;}else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.dataset.theme='dark';}else{document.documentElement.dataset.theme='light';}}catch(e){}})();
+</script>
+
+<style>
+:root {
+	--max: 750px;
+	--text: #1a1a1a;
+	--muted: #666;
+	--bg: #fff;
+	--accent: #134538;
+	--accent-light: #1a5c4a;
+	--accent-on: #fff;
+	--border: #e5e5e5;
+	--code-bg: #f5f5f5;
+	--card-bg: #fff;
+	--pre-bg: #f5f6f4;
+	--pre-fg: #24292e;
+	--graph-note: #22896a;
+}
+[data-theme="dark"] {
+	--text: #f2f4f3;
+	--muted: #9aa39d;
+	--bg: #06080a;
+	--accent: #E985A2;
+	--accent-light: #F4A4B8;
+	--accent-on: #1a0f14;
+	--border: #1a231f;
+	--code-bg: #161c19;
+	--card-bg: #0d1411;
+	--pre-bg: #0a0d0b;
+	--pre-fg: #e0e0e0;
+	--graph-note: #2fb488;
+}
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+	--text: #f2f4f3;
+	--muted: #9aa39d;
+	--bg: #06080a;
+	--accent: #E985A2;
+	--accent-light: #F4A4B8;
+	--accent-on: #1a0f14;
+	--border: #1a231f;
+	--code-bg: #161c19;
+	--card-bg: #0d1411;
+	--pre-bg: #0a0d0b;
+	--pre-fg: #e0e0e0;
+	--graph-note: #2fb488;
+	}
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { color-scheme: light dark; scroll-behavior: smooth; }
+html, body { overflow-x: hidden; }
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Pretendard Variable', 'Pretendard', 'Apple SD Gothic Neo', 'Segoe UI', system-ui, sans-serif;
+	color: var(--text); background: var(--bg); line-height: 1.75;
+	font-size: 16px; -webkit-font-smoothing: antialiased;
+	transition: background-color .2s, color .2s;
+}
+
+.side-tools {
+	position: fixed; top: 1rem; right: 1rem; z-index: 100;
+	display: flex; flex-direction: column; gap: 0.5rem;
+}
+.tool-btn {
+	width: 36px; height: 36px;
+	background: var(--card-bg);
+	border: 1px solid var(--border);
+	border-radius: 50%;
+	cursor: pointer;
+	display: grid; place-items: center;
+	color: var(--text);
+	transition: border-color .15s, background .15s, color .15s;
+}
+.tool-btn[hidden] { display: none; }
+.tool-btn:hover { border-color: var(--accent); }
+.tool-btn.active { border-color: var(--accent); color: var(--accent); }
+.tool-btn svg { width: 16px; height: 16px; }
+
+.side-panel {
+	position: fixed; top: 1rem; right: 4rem; z-index: 99;
+	width: 280px; max-height: calc(100vh - 2rem);
+	overflow-y: auto;
+	background: var(--card-bg);
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	padding: 1rem 1.1rem;
+	display: none;
+	box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+.side-panel.open { display: block; }
+.panel-head {
+	display: flex; align-items: center; justify-content: space-between;
+	margin-bottom: 0.6rem;
+}
+.panel-head h3 {
+	font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+	letter-spacing: 0.08em; color: var(--muted);
+}
+.pin-btn {
+	background: none; border: none; cursor: pointer; color: var(--muted);
+	width: 22px; height: 22px; display: grid; place-items: center;
+	border-radius: 5px;
+}
+.pin-btn:hover { color: var(--accent); background: var(--code-bg); }
+.pin-btn svg { width: 13px; height: 13px; }
+.g-controls { display: flex; gap: 2px; align-items: center; }
+
+/* docked mode: persistent right sidebar — TOC on top (scrolls), graph fills the rest */
+body.cmds-docked { padding-right: 312px; }
+body.cmds-docked .side-tools { right: calc(312px + 1rem); }
+body.cmds-docked #tocToggle, body.cmds-docked #graphToggle { display: none; }
+body.cmds-docked .pin-btn { color: var(--accent); }
+.side-dock {
+	position: fixed; top: 0; right: 0; bottom: 0; width: 312px; z-index: 98;
+	background: var(--card-bg); border-left: 1px solid var(--border);
+	display: flex; flex-direction: column;
+}
+.side-dock[hidden] { display: none; }
+.side-dock .side-panel {
+	position: static; display: block; width: auto; max-height: none;
+	border: none; border-radius: 0; box-shadow: none;
+}
+.side-dock #tocPanel { flex: 0 1 auto; min-height: 120px; max-height: 58%; overflow-y: auto; }
+.side-dock #graphPanel {
+	flex: 1 1 auto; min-height: 220px; overflow: hidden;
+	border-top: 1px solid var(--border);
+	display: flex; flex-direction: column;
+}
+.side-dock #graphPanel canvas { flex: 1; min-height: 0; }
+#graphCanvas { touch-action: none; cursor: grab; }
+#graphCanvas.dragging { cursor: grabbing; }
+#graphCanvas.on-node { cursor: pointer; }
+#tocList { display: flex; flex-direction: column; gap: 2px; }
+#tocList a {
+	color: var(--text); text-decoration: none; font-size: 0.82rem;
+	line-height: 1.4; padding: 0.25rem 0.5rem; border-radius: 6px;
+	display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#tocList a:hover { background: var(--code-bg); color: var(--accent); }
+#tocList a.active { background: var(--code-bg); color: var(--accent); font-weight: 600; }
+#tocList a.toc-h2 { padding-left: 1.1rem; }
+#tocList a.toc-h3 { padding-left: 1.7rem; font-size: 0.78rem; color: var(--muted); }
+#tocList a.toc-h4 { padding-left: 2.3rem; font-size: 0.78rem; color: var(--muted); }
+#graphCanvas { width: 100%; display: block; }
+.graph-legend {
+	display: flex; gap: 0.9rem; margin-top: 0.5rem;
+	font-size: 0.7rem; color: var(--muted);
+}
+.graph-legend span::before {
+	content: ''; display: inline-block; width: 8px; height: 8px;
+	border-radius: 50%; margin-right: 4px;
+}
+.graph-legend .lg-link::before { background: var(--graph-note); }
+.graph-legend .lg-tag::before { background: #E985A2; }
+
+main {
+	max-width: var(--max); margin: 0 auto; padding: 4rem 1.5rem 3rem;
+}
+
+
+#note-content { font-size: 1rem; overflow-wrap: break-word; }
+#note-content h1, #note-content h2, #note-content h3,
+#note-content h4, #note-content h5, #note-content h6 {
+	font-weight: 700; letter-spacing: -0.02em; line-height: 1.3;
+	margin: 2rem 0 0.75rem; scroll-margin-top: 1.5rem;
+}
+#note-content h1 { font-size: 1.85rem; margin-top: 2.4rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+#note-content h2 { font-size: 1.4rem; margin-top: 2.2rem; }
+#note-content h3 { font-size: 1.18rem; }
+#note-content h4 { font-size: 1.06rem; color: var(--text); margin-top: 1.8rem; }
+#note-content h5 { font-size: 0.98rem; color: var(--text); }
+#note-content h6 { font-size: 0.9rem; color: var(--muted); }
+#note-content p { margin: 0.85rem 0; }
+#note-content ul, #note-content ol { margin: 0.85rem 0 0.85rem 1.4rem; }
+#note-content li { margin: 0.35rem 0; }
+#note-content li > ul, #note-content li > ol { margin: 0.25rem 0 0.25rem 1.2rem; }
+#note-content a {
+	color: var(--accent); text-decoration: none;
+	border-bottom: 1px solid transparent; transition: border-color .15s;
+}
+#note-content a:hover { border-bottom-color: var(--accent); }
+#note-content code {
+	background: var(--code-bg); padding: 0.18em 0.45em; border-radius: 6px;
+	font-size: 0.86em; font-family: 'SF Mono', 'Menlo', monospace;
+}
+#note-content pre {
+	background: var(--pre-bg); color: var(--pre-fg);
+	border: 1px solid var(--border);
+	padding: 1rem; border-radius: 12px;
+	overflow-x: auto; font-size: 0.85rem; line-height: 1.6;
+	font-family: 'SF Mono', 'Menlo', monospace; margin: 1rem 0;
+	position: relative;
+}
+#note-content pre code { background: transparent; padding: 0; font-size: 1em; }
+#note-content pre[data-lang]::before {
+	content: attr(data-lang);
+	position: absolute; top: 7px; left: 12px;
+	font-size: 0.66rem; font-weight: 600; letter-spacing: 0.05em;
+	color: var(--muted); opacity: 0.75; text-transform: lowercase;
+	font-family: -apple-system, sans-serif;
+}
+#note-content pre[data-lang] { padding-top: 1.9rem; }
+#note-content blockquote {
+	border-left: 3px solid var(--accent); padding: 0.5rem 1rem;
+	margin: 1rem 0; color: var(--muted); background: var(--code-bg);
+	border-radius: 0 8px 8px 0;
+}
+#note-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0; }
+#note-content table {
+	border-collapse: collapse; margin: 1rem 0;
+	font-size: 0.9rem;
+	/* wide tables scroll inside themselves instead of panning the page */
+	display: block; width: max-content; min-width: 60%; max-width: 100%;
+	overflow-x: auto;
+}
+#note-content th, #note-content td {
+	border: none; border-bottom: 1px solid var(--border);
+	padding: 0.65rem 0.9rem; text-align: left; vertical-align: top;
+}
+#note-content th { font-weight: 700; font-size: 0.85rem; color: var(--muted); border-bottom-width: 2px; }
+#note-content tr:last-child td { border-bottom: none; }
+#note-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+#note-content mark { background: rgba(233,133,162,0.25); padding: 0 0.2rem; border-radius: 3px; }
+#note-content .callout {
+	--co: var(--accent);
+	background: var(--code-bg); border-radius: 8px; padding: 0.9rem 1rem;
+	margin: 1rem 0; border-left: 3px solid var(--co);
+}
+#note-content .callout-title {
+	display: flex; align-items: center; gap: 0.5em;
+	font-weight: 700; color: var(--co); margin: 0;
+}
+#note-content .callout-icon { display: flex; align-items: center; flex-shrink: 0; }
+#note-content .callout-icon svg, #note-content .callout-title > svg {
+	width: 1.1em; height: 1.1em;
+}
+#note-content .callout-title-inner { line-height: 1.45; }
+#note-content .callout-fold { display: none; }
+#note-content .callout.is-collapsible > .callout-title { cursor: pointer; }
+#note-content .callout.is-collapsible .callout-fold {
+	display: flex; margin-left: auto; color: var(--muted); transition: transform .15s;
+}
+#note-content .callout.is-collapsed .callout-fold { transform: rotate(-90deg); }
+#note-content .callout-fold svg { width: 1em; height: 1em; }
+#note-content .callout-content > :first-child { margin-top: 0.45rem; }
+#note-content .callout-content > :last-child { margin-bottom: 0.1rem; }
+#note-content .callout[data-callout="abstract"], #note-content .callout[data-callout="summary"], #note-content .callout[data-callout="tldr"] { --co: #23a8b8; }
+#note-content .callout[data-callout="info"], #note-content .callout[data-callout="note"], #note-content .callout[data-callout="todo"] { --co: #4a8edb; }
+#note-content .callout[data-callout="tip"], #note-content .callout[data-callout="hint"], #note-content .callout[data-callout="important"] { --co: #23b89b; }
+#note-content .callout[data-callout="success"], #note-content .callout[data-callout="check"], #note-content .callout[data-callout="done"] { --co: #3aa657; }
+#note-content .callout[data-callout="question"], #note-content .callout[data-callout="help"], #note-content .callout[data-callout="faq"] { --co: #d9a13b; }
+#note-content .callout[data-callout="warning"], #note-content .callout[data-callout="caution"], #note-content .callout[data-callout="attention"] { --co: #e0813a; }
+#note-content .callout[data-callout="danger"], #note-content .callout[data-callout="error"], #note-content .callout[data-callout="failure"], #note-content .callout[data-callout="fail"], #note-content .callout[data-callout="missing"], #note-content .callout[data-callout="bug"] { --co: #e05252; }
+#note-content .callout[data-callout="example"] { --co: #8a6fd6; }
+#note-content .callout[data-callout="quote"], #note-content .callout[data-callout="cite"] { --co: var(--muted); }
+#note-content .internal-link {
+	color: var(--accent); border-bottom: 1px dashed var(--accent); cursor: help;
+}
+
+#note-content pre { position: relative; }
+.code-copy {
+	position: absolute; top: 8px; right: 8px;
+	width: 28px; height: 28px; border-radius: 6px;
+	background: color-mix(in srgb, var(--card-bg) 92%, transparent);
+	backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+	border: 1px solid var(--border);
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.18);
+	color: var(--muted); cursor: pointer;
+	display: grid; place-items: center;
+	opacity: 0; transition: opacity .15s, color .15s, border-color .15s;
+}
+#note-content pre:hover .code-copy, .code-copy.copied { opacity: 1; }
+.code-copy:hover, .code-copy.copied { color: var(--accent); border-color: var(--accent); }
+.code-copy svg { width: 14px; height: 14px; }
+.h-anchor {
+	margin-left: 0.4rem; opacity: 0; color: var(--muted);
+	border-bottom: none !important; transition: opacity .15s, color .15s;
+}
+.h-anchor svg { width: 0.75em; height: 0.75em; }
+.h-anchor:hover { color: var(--accent); }
+#note-content h1:hover .h-anchor, #note-content h2:hover .h-anchor,
+#note-content h3:hover .h-anchor, #note-content h4:hover .h-anchor { opacity: 0.75; }
+.mermaid-container { margin: 1rem 0; overflow-x: auto; text-align: center; }
+.mermaid-container svg { max-width: 100%; height: auto; }
+
+/* ── title heading ── */
+.cmds-doc-header { margin: 0 0 2rem; }
+.cmds-doc-kind {
+	display: inline-block; margin-bottom: 0.7rem;
+	font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+	color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent);
+	border-radius: 999px; padding: 0.2rem 0.65rem;
+}
+.cmds-doc-title {
+	font-size: clamp(1.9rem, 4.2vw, 2.6rem); font-weight: 800;
+	letter-spacing: -0.03em; line-height: 1.18; text-wrap: balance;
+}
+#note-content > :first-child, #note-content > .markdown-preview-sizer > :first-child { margin-top: 0; }
+
+/* ── wide layout (drawings, canvases, bases) ── */
+body.cmds-layout-wide { --max: 1320px; }
+body.cmds-layout-wide main { padding-top: 3.5rem; }
+
+/* ── Excalidraw ── */
+.cmds-excalidraw { margin: 0; }
+.cmds-excalidraw > svg {
+	border-radius: 14px; border: 1px solid var(--border);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 12px 32px rgba(0,0,0,0.10);
+}
+
+/* ── JSON Canvas ── */
+:root {
+	--cv-c1: #e93147; --cv-c2: #ec7500; --cv-c3: #e0ac00;
+	--cv-c4: #08b94e; --cv-c5: #00bfbc; --cv-c6: #7852ee;
+}
+.cmds-canvas {
+	position: relative; overflow: hidden; touch-action: none;
+	border: 1px solid var(--border); border-radius: 14px; height: 70vh; min-height: 320px;
+	background-color: var(--bg);
+	background-image: radial-gradient(circle, color-mix(in srgb, var(--muted) 35%, transparent) 1px, transparent 1.2px);
+	background-size: 22px 22px;
+	cursor: grab; user-select: none;
+}
+.cmds-canvas.dragging { cursor: grabbing; }
+.cmds-canvas:fullscreen { border-radius: 0; border: none; height: 100vh; }
+.cmds-canvas-world { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
+.cmds-canvas-empty { padding: 2rem; color: var(--muted); text-align: center; }
+.cv-group {
+	position: absolute; border-radius: 14px;
+	border: 2px solid var(--node-color, color-mix(in srgb, var(--muted) 45%, transparent));
+	background: color-mix(in srgb, var(--node-color, var(--muted)) 7%, transparent);
+}
+.cv-group-label {
+	position: absolute; bottom: 100%; left: 0; margin-bottom: 6px;
+	font-size: 1.05rem; font-weight: 700; color: var(--node-color, var(--muted));
+	white-space: nowrap;
+}
+.cv-edges { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.cv-edge path { fill: none; stroke: var(--edge-color, var(--muted)); stroke-width: 2.5; stroke-linecap: round; }
+.cv-edge polygon { fill: var(--edge-color, var(--muted)); stroke: var(--edge-color, var(--muted)); stroke-width: 1; stroke-linejoin: round; }
+.cv-edge-label {
+	position: absolute; transform: translate(-50%, -50%);
+	font-size: 0.8rem; font-weight: 600; padding: 0.15rem 0.55rem; border-radius: 6px;
+	background: var(--bg); color: var(--edge-color, var(--muted));
+	border: 1px solid color-mix(in srgb, var(--edge-color, var(--muted)) 40%, var(--border));
+	white-space: nowrap;
+}
+.cv-node {
+	position: absolute; display: flex; flex-direction: column;
+	border-radius: 12px; overflow: visible;
+	border: 2px solid var(--node-color, var(--border));
+	background: color-mix(in srgb, var(--node-color, transparent) 9%, var(--card-bg));
+	box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 6px 18px rgba(0,0,0,0.06);
+}
+.cv-body {
+	flex: 1; min-height: 0; overflow: auto; padding: 0.9rem 1.1rem;
+	font-size: 0.95rem; line-height: 1.6; user-select: text; cursor: auto;
+	border-radius: 10px; overscroll-behavior: contain;
+}
+#note-content .cv-body > :first-child { margin-top: 0 !important; }
+#note-content .cv-body > :last-child { margin-bottom: 0 !important; }
+#note-content .cv-body h1 { font-size: 1.45rem; border: none; padding: 0; margin: 0.6rem 0 0.4rem; }
+#note-content .cv-body h2 { font-size: 1.2rem; margin: 0.6rem 0 0.4rem; }
+#note-content .cv-body h3, #note-content .cv-body h4 { font-size: 1.02rem; margin: 0.5rem 0 0.3rem; }
+#note-content .cv-body .h-anchor { display: none; }
+.cv-file-label {
+	position: absolute; bottom: 100%; left: 2px; margin-bottom: 4px;
+	font-size: 0.78rem; font-weight: 600; color: var(--muted);
+	white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+}
+.cv-image { background: transparent; box-shadow: none; border-color: transparent; }
+.cv-image img { width: 100%; height: 100%; object-fit: contain; border-radius: 10px; }
+.cv-body .cmds-excalidraw { border: none; padding: 0; background: transparent; }
+.cv-missing { color: var(--muted); font-style: italic; display: grid; place-items: center; }
+.cv-link-card {
+	flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0.3rem;
+	padding: 1rem 1.2rem; text-decoration: none; color: var(--text); cursor: pointer; min-height: 0;
+}
+.cv-link-host { font-weight: 700; font-size: 1rem; color: var(--accent); }
+.cv-link-url { font-size: 0.78rem; color: var(--muted); word-break: break-all; overflow: hidden; }
+.cmds-canvas-ui {
+	position: absolute; right: 12px; bottom: 12px; z-index: 2;
+	display: flex; gap: 4px; padding: 4px; border-radius: 10px;
+	background: color-mix(in srgb, var(--card-bg) 88%, transparent);
+	border: 1px solid var(--border); backdrop-filter: blur(8px);
+}
+.cmds-canvas-ui button {
+	width: 30px; height: 30px; border: none; border-radius: 7px; cursor: pointer;
+	background: transparent; color: var(--text); display: grid; place-items: center;
+}
+.cmds-canvas-ui button:hover { background: var(--code-bg); color: var(--accent); }
+.cmds-canvas-ui svg { width: 15px; height: 15px; }
+.cmds-canvas-hint {
+	position: absolute; left: 12px; bottom: 12px; z-index: 2;
+	font-size: 0.72rem; color: var(--muted); pointer-events: none;
+	background: color-mix(in srgb, var(--card-bg) 80%, transparent); padding: 0.2rem 0.5rem; border-radius: 6px;
+}
+
+/* ── Bases ── */
+/* Fit (default): Obsidian-like single-line rows, columns sized to content,
+   long values truncated. Wrap: values wrap at a readable width. Viewers can
+   drag column edges (fixed widths) and click a row to expand it. */
+.cmds-base-section + .cmds-base-section { margin-top: 2.5rem; }
+#note-content .cmds-base-view-name { font-size: 1.2rem; border: none; padding: 0; margin: 0 0 0.6rem; }
+.cmds-base-bar {
+	display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+	flex-wrap: wrap; margin-bottom: 0.8rem;
+}
+.cmds-base-bar .cmds-base-count { margin: 0; }
+.cmds-base-count { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.8rem; font-variant-numeric: tabular-nums; }
+.cmds-base-tools { display: inline-flex; gap: 4px; align-items: center; }
+.cmds-base-tools button {
+	font: inherit; font-size: 0.74rem; font-weight: 600; cursor: pointer;
+	padding: 0.2rem 0.6rem; border-radius: 999px; box-shadow: none; height: auto;
+	border: 1px solid var(--border); background: transparent; color: var(--muted);
+}
+.cmds-base-tools button:hover { color: var(--text); border-color: var(--accent); }
+.cmds-base-tools button.on { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.cmds-base-tools button[hidden] { display: none; }
+.cmds-base-group + .cmds-base-group { margin-top: 1.6rem; }
+.cmds-base-group-head {
+	display: flex; align-items: center; gap: 0.5rem;
+	font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem;
+}
+.cmds-base-group-label.is-empty { color: var(--muted); font-weight: 500; font-style: italic; }
+.cmds-base-group-count {
+	font-size: 0.72rem; font-weight: 600; color: var(--muted);
+	background: var(--code-bg); border-radius: 999px; padding: 0.05rem 0.5rem;
+}
+.cmds-base-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+#note-content table.cmds-base-table {
+	display: table; table-layout: auto; width: max-content; min-width: 100%; max-width: none;
+	margin: 0; border: none; border-collapse: collapse; font-size: 0.88rem;
+}
+#note-content table.cmds-base-table.is-sized { table-layout: fixed; min-width: 0; }
+#note-content .cmds-base-table th {
+	position: sticky; top: 0; z-index: 1; text-align: left; white-space: nowrap;
+	font-size: 0.78rem; font-weight: 600; color: var(--muted); background: var(--card-bg);
+	border: none; border-bottom: 1px solid var(--border); padding: 0.5rem 0.9rem;
+	overflow: hidden; text-overflow: ellipsis;
+}
+#note-content .cmds-base-table td {
+	border: none; border-bottom: 1px solid var(--border); padding: 0.45rem 0.9rem; vertical-align: top;
+	white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 26rem;
+}
+#note-content .cmds-base-table.is-sized td { max-width: none; }
+#note-content .cmds-base-table td > * { margin: 0; }
+#note-content .cmds-base-table td p { display: inline; }
+#note-content .cmds-base-view.is-wrap .cmds-base-table td,
+#note-content .cmds-base-table tr.is-expanded td {
+	white-space: normal; overflow-wrap: anywhere; overflow: visible; max-width: 30rem; line-height: 1.55;
+}
+#note-content .cmds-base-view.is-wrap .cmds-base-table.is-sized td,
+#note-content .cmds-base-table.is-sized tr.is-expanded td { max-width: none; }
+#note-content .cmds-base-table tbody tr { cursor: pointer; }
+#note-content .cmds-base-table tr.cmds-base-group-row { cursor: default; }
+#note-content .cmds-base-table td.cmds-base-group-cell {
+	white-space: nowrap; max-width: none; overflow: visible; background: none !important;
+	padding: 1.1rem 0.9rem 0.45rem; border-bottom: 1px solid var(--border);
+}
+#note-content .cmds-base-table tbody:first-of-type td.cmds-base-group-cell { padding-top: 0.7rem; }
+#note-content .cmds-base-table td.cmds-base-group-cell .cmds-base-group-head { margin: 0; position: sticky; left: 0.9rem; display: inline-flex; }
+#note-content .cmds-base-table tr:last-child td { border-bottom: none; }
+#note-content .cmds-base-table tbody tr:hover td { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+#note-content .cmds-base-table tr.is-expanded td { background: color-mix(in srgb, var(--accent) 7%, transparent); }
+.cmds-col-grip {
+	position: absolute; top: 0; right: 0; width: 9px; height: 100%;
+	cursor: col-resize; z-index: 2; touch-action: none;
+}
+.cmds-col-grip::after {
+	content: ''; position: absolute; top: 25%; bottom: 25%; right: 0; width: 1px;
+	background: var(--border); transition: background .15s;
+}
+.cmds-col-grip:hover::after, .cmds-col-grip.dragging::after { background: var(--accent); top: 0; bottom: 0; width: 2px; }
+.cmds-base-table th .cmds-th-inner { display: block; overflow: hidden; text-overflow: ellipsis; padding-right: 6px; }
+.cmds-base-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.9rem; }
+.cmds-base-card { border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1rem; background: var(--card-bg); }
+.cmds-base-card-title { font-weight: 700; margin-bottom: 0.5rem; }
+.cmds-base-card-prop { display: flex; gap: 0.6rem; font-size: 0.82rem; line-height: 1.5; }
+.cmds-base-card-key { color: var(--muted); flex: 0 0 38%; overflow: hidden; text-overflow: ellipsis; }
+.cmds-base-card-val { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+#note-content .cmds-base .value-list-container { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+#note-content .cmds-base .value-list-element {
+	background: var(--code-bg); border-radius: 6px; padding: 0 0.4rem; font-size: 0.85em;
+}
+#note-content .cmds-base .value-list-element p { margin: 0; }
+
+.cmds-meta {
+	max-width: var(--max); margin: 0 auto;
+	padding: 2rem 1.5rem 2rem; border-top: 1px solid var(--border);
+	font-size: 0.75rem; color: var(--muted); text-align: center;
+	display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+}
+.cmds-meta img { width: 28px; height: 28px; border-radius: 50%; }
+.cmds-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.cmds-badge {
+	display: inline-flex; align-items: center; gap: 0.35em;
+	font-size: 0.7rem; font-weight: 600; color: var(--muted);
+	border: 1px solid var(--border); border-radius: 999px;
+	padding: 0.22rem 0.65rem; background: var(--card-bg);
+}
+.cmds-badge svg { width: 12px; height: 12px; }
+.cmds-badge.b-e2e { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
+.cmds-badge.b-soon { color: #e0813a; border-color: color-mix(in srgb, #e0813a 45%, var(--border)); }
+.cmds-badge.b-expired { color: #e05252; border-color: color-mix(in srgb, #e05252 45%, var(--border)); }
+.cmds-meta a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.cmds-meta a:hover { text-decoration: underline; }
+.cmds-theme-note { font-size: 0.68rem; color: var(--muted); opacity: 0.75; }
+.cmds-author-link {
+	margin-top: 0.35rem; font-size: 0.85rem; font-weight: 700;
+	letter-spacing: -0.01em;
+}
+.cmds-loading { color: var(--muted); font-style: italic; }
+.decrypt-error {
+	color: #c62828; background: #fce4ec; padding: 1rem; border-radius: 8px;
+	border: 1px solid #c62828; margin: 2rem 0; text-align: center;
+}
+[data-theme="dark"] .decrypt-error { background: #4a1a24; color: #ff8899; border-color: #ff8899; }
+
+@media (max-width: 720px) {
+	.side-panel { right: 1rem; top: 4rem; width: min(280px, calc(100vw - 2rem)); }
+}
+</style>
+
+<style>
+#note-content li.task-list-item { list-style: none !important; }
+#note-content input[type="checkbox"] {
+	all: revert !important;
+	appearance: auto !important;
+	display: inline-block !important;
+	position: static !important;
+	width: 1em !important; height: 1em !important;
+	margin: 0 0.5em 0 0 !important;
+	vertical-align: -0.1em !important;
+	opacity: 1 !important;
+	accent-color: var(--accent) !important;
+}
+#note-content input[type="checkbox"]::before,
+#note-content input[type="checkbox"]::after { content: none !important; display: none !important; }
+</style>
+</head>
+<body class="cmds-kind-note cmds-layout-note">
+<script>
+// Obsidian themes switch on body.theme-light / body.theme-dark
+(function(){var b=document.body,r=document.documentElement;function sync(){var d=r.dataset.theme==='dark';b.classList.toggle('theme-dark',d);b.classList.toggle('theme-light',!d);}sync();new MutationObserver(sync).observe(r,{attributes:true,attributeFilter:['data-theme']});})();
+</script>
+
+
+<div class="side-tools">
+	<button class="tool-btn" id="themeToggle" aria-label="Toggle theme">
+		<svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+	</button>
+	<button class="tool-btn" id="tocToggle" aria-label="Table of contents" hidden>
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h10M4 18h13"/></svg>
+	</button>
+	<button class="tool-btn" id="graphToggle" aria-label="Local graph" hidden>
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="18" r="2.2"/><path d="M10.8 6.9 6.2 16m7-9.1 4.6 9.1M7.2 18h9.6"/></svg>
+	</button>
+	<button class="tool-btn" id="mdCopy" aria-label="Copy markdown" title="Copy markdown" hidden>
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h8A2.5 2.5 0 0 1 15 4.5V5"/></svg>
+	</button>
+	<button class="tool-btn" id="mdDownload" aria-label="Download markdown" title="Download .md" hidden>
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5"/><path d="M4 19h16"/></svg>
+	</button>
+</div>
+
+<div class="side-dock" id="sideDock" hidden></div>
+
+<aside class="side-panel" id="tocPanel"><div class="panel-head"><h3>Contents</h3><button class="pin-btn" data-pin aria-label="Dock panels" title="Dock / undock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5M9 3h6l1 7 3 2H5l3-2 1-7z"/></svg></button></div><nav id="tocList"></nav></aside>
+<aside class="side-panel" id="graphPanel"><div class="panel-head"><h3>Local Graph</h3><span class="g-controls"><button class="pin-btn" id="gZoomOut" aria-label="Zoom out" title="Zoom out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/></svg></button><button class="pin-btn" id="gZoomIn" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button><button class="pin-btn" id="gReset" aria-label="Reset view" title="Reset view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v4h4"/></svg></button><button class="pin-btn" data-pin aria-label="Dock panels" title="Dock / undock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5M9 3h6l1 7 3 2H5l3-2 1-7z"/></svg></button></span></div><canvas id="graphCanvas"></canvas>
+<div class="graph-legend"><span class="lg-link">Notes</span><span class="lg-tag">Tags</span></div></aside>
+
+<main>
+	<header class="cmds-doc-header"><h1 class="cmds-doc-title">MVP student city</h1></header><article id="note-content" class="markdown-rendered"><p dir="auto">город</p>
+<p dir="auto"><strong>для кого?</strong></p>
+<ul>
+<li dir="auto">для студентов</li>
+</ul>
+<p dir="auto"><strong>город в масштабе групп, филиала, всего CoddyCamp</strong>?</p>
+<ul>
+<li dir="auto">да</li>
+</ul>
+<p dir="auto"><strong>зачем нужен город?</strong></p>
+<ul>
+<li dir="auto">вариант: повысить регулярность учебной активности в LMS</li>
+<li dir="auto">геймификация: выполняешь задания, видишь рост здания своей группы, возвращаешься за следующим прогрессом</li>
+<li dir="auto">гипотеза: чувство упущенной возможности продвинуться будет мотивировать возвращаться (FOMO, референс — Brawl Stars)</li>
+<li dir="auto">нужно обсудить с CEO и CPO, какое поведение хотим усилить и как поймем, что город помогает</li>
+</ul>
+<p dir="auto"><strong>каким образом отображаем?</strong></p>
+<ul>
+<li dir="auto">каждое здание — одна группа</li>
+</ul>
+<p dir="auto"><strong>как будет выглядеть на мониторе?</strong></p>
+<ul>
+<li dir="auto">слайды / движущаяся камера по зданиям</li>
+</ul>
+<p dir="auto"><strong>как здание будет расти?</strong></p>
+<ul>
+<li dir="auto">по учебной активности в LMS</li>
+<li dir="auto">за посещаемость тоже должна быть награда</li>
+<li dir="auto">оплата на рост здания не влияет</li>
+</ul>
+<p dir="auto"><strong>здание будет только расти?</strong></p>
+<ul>
+<li dir="auto">да, пока не убираем этажи</li>
+</ul>
+<p dir="auto"><strong>где показываем правила роста?</strong></p>
+<ul>
+<li dir="auto">в LMS аккаунте студента</li>
+</ul>
+<p dir="auto"><strong>что показываем на одном слайде?</strong></p>
+<ul>
+<li dir="auto">название группы</li>
+<li dir="auto">имя ментора</li>
+<li dir="auto">текущий уровень / этаж</li>
+<li dir="auto">дельта роста относительно предыдущего дня /  недели (+1/2/3 этажа)</li>
+<li dir="auto">предложение: отдельно показывать этажи за учебу и бонус за посещаемость</li>
+<li dir="auto">3д модельку ментора который крутится вокруг здания / на крыше здания (додумать)</li>
+</ul>
+<p dir="auto"><strong>что показываем на здании?</strong></p>
+<ul>
+<li dir="auto">3д модельку ментора который крутится вокруг здания / на крыше здания (додумать)</li>
+<li dir="auto">тему урока за которую получили этаж</li>
+<li dir="auto">тему последнего урока за которую получат этаж </li>
+</ul>
+<p dir="auto"><strong>что считаем одним уроком?</strong></p>
+<ul>
+<li dir="auto">Class включает классные и домашние работы</li>
+</ul>
+<p dir="auto"><strong>почему нельзя просто считать количество практик?</strong></p>
+<ul>
+<li dir="auto">курс с большим количеством заданий будет давать больше этажей из-за структуры урока</li>
+<li dir="auto">один тест и тест с шестью практиками не обязательно требуют одинаковых усилий</li>
+<li dir="auto">при этом семь заданий не означают, что усилий ровно в семь раз больше</li>
+</ul>
+<p dir="auto"><strong>с каким темпом здание растет?</strong></p>
+<ul>
+<li dir="auto">варианты: этаж за каждое задание, этаж за учебный этап или баллы с учетом сложности заданий</li>
+<li dir="auto">предложение для MVP: один завершенный учебный этап = максимум один этаж</li>
+<li dir="auto">Class может быть таким этапом, но это нужно проверить по каждому курсу</li>
+<li dir="auto">баллы с учетом сложности пока отложить: их придется оценивать и настраивать</li>
+</ul>
+<p dir="auto"><strong>что значит завершить учебный этап?</strong></p>
+<ul>
+<li dir="auto">предложение: выполнить все обязательные работы этого этапа по правилам курса
+<ul>
+<li dir="auto">Robotexnika: пройти тест, если он полностью представляет результат этапа</li>
+<li dir="auto">WEB Junior: выполнить обязательный тест и практики, включая домашнюю работу</li>
+<li dir="auto">AI Startup: отдельно определить, как подтверждаем результат JSX-урока</li>
+</ul>
+</li>
+<li dir="auto">просто открыть или посмотреть урок недостаточно — предложение</li>
+<li dir="auto">нужно проверить, какие подтверждения выполнения уже есть в LMS</li>
+</ul>
+<p dir="auto"><strong>что должно произойти, чтобы здание выросло на один этаж?</strong></p>
+<ul>
+<li dir="auto">варианты порога: все ученики, 90%, 80% или 70%</li>
+<li dir="auto">предложение для MVP: этап завершили минимум 80% учеников, которым он назначен</li>
+<li dir="auto">80% — это доля учеников, а не доля выполненных заданий</li>
+<li dir="auto">количество учеников округляем вверх
+<ul>
+<li dir="auto">из 5 нужны 4</li>
+<li dir="auto">из 6 нужны 5</li>
+<li dir="auto">из 7 нужны 6</li>
+<li dir="auto">из 8 нужны 7</li>
+<li dir="auto">из 10 нужны 8</li>
+</ul>
+</li>
+<li dir="auto">при 90% в группах из 5–8 человек фактически нужны все</li>
+<li dir="auto">80% пока гипотеза, нужно проверить, достаточно ли часто группы получают этажи</li>
+</ul>
+<p dir="auto"><strong>что делать с незавершенными уроками?</strong></p>
+<ul>
+<li dir="auto">предложение: прошлый незавершенный этап не мешает получить этаж за следующий</li>
+<li dir="auto">пропущенный этап можно завершить позже</li>
+<li dir="auto">один этап дает этаж только один раз</li>
+<li dir="auto">полученные этажи не сгорают</li>
+</ul>
+<p dir="auto"><strong>как поощряем посещаемость?</strong></p>
+<ul>
+<li dir="auto">отдельной наградой, кроме этажей за учебные задания</li>
+<li dir="auto">вариант: +1 этаж в конце недели, если посещаемость группы не ниже 95%</li>
+<li dir="auto">порог, период и размер награды пока не утверждены</li>
+</ul>
+<p dir="auto"><strong>как считать посещаемость?</strong></p>
+<ul>
+<li dir="auto">предложение: фактические посещения / ожидаемые посещения за проведенные занятия недели</li>
+<li dir="auto">пример: 5 учеников и 2 занятия = 10 ожидаемых посещений</li>
+<li dir="auto">один пропуск: 9 из 10 = 90%, то есть для порога 95% нужны все 10</li>
+<li dir="auto">предложение: отмененные занятия не учитывать, если занятий не было — бонус не выдавать</li>
+<li dir="auto">предложение: максимум один такой бонус за неделю</li>
+<li dir="auto">нужно решить, как учитывать уважительные пропуски и подходит ли 95% маленьким группам</li>
+</ul>
+<p dir="auto"><strong>как учитываем оплату?</strong></p>
+<ul>
+<li dir="auto">на этажи и скорость роста не влияет</li>
+</ul>
+<p dir="auto"><strong>нужно ли разделение по четным / нечетным дням?</strong></p>
+<ul>
+<li dir="auto">да</li>
+</ul>
+<p dir="auto"><strong>отображение прогресса этажами не дает полного понимания текущего прогресса здания, проблема ли это?</strong></p>
+<ul>
+<li dir="auto">да, показываем рядом группы, которые выросли на 1–2 этажа</li>
+<li dir="auto">1–2 означает один-два целых этажа, не половину</li>
+<li dir="auto">предложение: дополнительно показывать, сколько осталось своей группе до следующего этажа
+<ul>
+<li dir="auto">пример: сейчас 8 этажей, сегодня +1</li>
+<li dir="auto">этап завершили 6 из 8, для этажа нужны 7 из 8</li>
+<li dir="auto">осталось еще одно завершение</li>
+</ul>
+</li>
+</ul>
+<p dir="auto"><strong>какой сценарий студента предполагаем?</strong></p>
+<ul>
+<li dir="auto">вариант: увидел здание группы → понял, чего не хватает до этажа → открыл LMS → выполнил задание → группа получила этаж, когда достигла порога</li>
+</ul>
+<p dir="auto"><strong>что обсудить с CEO и CPO?</strong></p>
+<ul>
+<li dir="auto">какую цель решает город и какое поведение хотим усилить?</li>
+<li dir="auto">подходит ли единица «учебный этап» с разными условиями по курсам?</li>
+<li dir="auto">сравниваем группы внутри курса или делаем соревнование между курсами?</li>
+<li dir="auto">подходит ли порог 80% для пилота?</li>
+<li dir="auto">какой бонус за посещаемость выбрать?</li>
+</ul>
+<p dir="auto"><strong>что проверить с владельцами курсов и по LMS?</strong></p>
+<ul>
+<li dir="auto">какие работы обязательны для завершения этапа на каждом курсе?</li>
+<li dir="auto">как фиксируется выполнение тестов, практик и JSX-уроков?</li>
+<li dir="auto">как учитывать переводы, заморозки и состав учеников для расчета?</li>
+<li dir="auto">будет ли темп роста приемлемым на каждом курсе?</li>
+</ul>
+<p dir="auto"><strong>как проверим, что механика работает?</strong></p>
+<ul>
+<li dir="auto">предложение: смотреть долю завершивших этап, время до нового этажа и долю групп без роста</li>
+<li dir="auto">смотреть отдельно по курсам, с учетом расписания и состава групп</li>
+<li dir="auto">критерии успеха нужно согласовать</li>
+</ul>
+<p dir="auto"><strong>пасхалка в виде огромной 3д модели с моей головой который будет делать что то</strong></p>
+<p dir="auto"><strong>кейс: новая группа уже получала этаж за тему A, у нового ученика этот урок не выполнен - этаж у новой группы не исчезает. тот же кейс только у группы этажа за тему нет - новый ученик тоже должен выполнить</strong> ===============================================<br>
+кейс тот же самый только теперь у ученика урок за тему выполнен а этажа у группы нет</p></article>
+</main>
+
+<footer class="cmds-meta">
+	
+	<a href="https://cmdspace.work" target="_blank" rel="noopener"><img src="https://cmdspace.work/assets/logos/cmds-logo-round.png" alt="CMDSPACE"></a>
+	<span>Shared via <a href="https://github.com/johnfkoo951/cmds-share" target="_blank" rel="noopener">CMDS Share</a></span>
+	<span class="cmds-theme-note">Theme: CMDS</span>
+	
+</footer>
+
+
+
+<script type="application/json" id="graph-data">{"title":"MVP student city","nodes":[{"label":"MVP student city","type":"note","level":0},{"label":"Город учеников","type":"note","level":1},{"label":"Основания первой версии","type":"note","level":1},{"label":"Начать здесь","type":"note","level":1},{"label":"Карта продукта.canvas","type":"note","level":1},{"label":"Удержание.canvas","type":"note","level":1},{"label":"Проверка пользы города","type":"note","level":2},{"label":"03 Обучение и результат","type":"note","level":2},{"label":"04 Продолжение и уход","type":"note","level":2},{"label":"Карта компании.canvas","type":"note","level":2},{"label":"00 Успех CODDY","type":"note","level":2},{"label":"Шаблон вопроса","type":"note","level":2},{"label":"01 Ценность для семей","type":"note","level":2},{"label":"02 Привлечение и первая оплата","type":"note","level":2},{"label":"05 Рекомендации и возвращение","type":"note","level":2},{"label":"06 Экономика компании","type":"note","level":2},{"label":"07 Управление и обеспечение","type":"note","level":2},{"label":"Желание ученика продолжать","type":"note","level":2},{"label":"Решение родителя продолжать","type":"note","level":2},{"label":"Обстоятельства семьи","type":"note","level":2},{"label":"Определение продолжения и ухода","type":"note","level":2},{"label":"Ощущение учебного прогресса","type":"note","level":2},{"label":"Сигналы риска ухода","type":"note","level":2},{"label":"Практика и обратная связь","type":"note","level":2},{"label":"Причины невыполнения заданий","type":"note","level":2}],"edges":[[0,1],[0,2],[0,3],[0,4],[0,5],[1,6],[1,4],[1,7],[1,8],[1,9],[1,3],[2,4],[2,1],[2,3],[3,9],[3,5],[3,10],[3,11],[3,12],[3,13],[3,7],[3,8],[3,14],[3,15],[3,16],[3,6],[3,4],[5,9],[5,2],[5,4],[5,1],[5,8],[5,17],[5,18],[5,19],[5,20],[5,21],[5,22],[5,23],[5,24],[5,6]]}</script>
+<script type="text/plain" id="md-source">0LPQvtGA0L7QtAoKKirQtNC70Y8g0LrQvtCz0L4/KioKCi0g0LTQu9GPINGB0YLRg9C00LXQvdGC0L7QsgoKKirQs9C+0YDQvtC0INCyINC80LDRgdGI0YLQsNCx0LUg0LPRgNGD0L/Qvywg0YTQuNC70LjQsNC70LAsINCy0YHQtdCz0L4gQ29kZHlDYW1wKio/Ci0g0LTQsAoKKirQt9Cw0YfQtdC8INC90YPQttC10L0g0LPQvtGA0L7QtD8qKgoKLSDQstCw0YDQuNCw0L3Rgjog0L/QvtCy0YvRgdC40YLRjCDRgNC10LPRg9C70Y/RgNC90L7RgdGC0Ywg0YPRh9C10LHQvdC+0Lkg0LDQutGC0LjQstC90L7RgdGC0Lgg0LIgTE1TCi0g0LPQtdC50LzQuNGE0LjQutCw0YbQuNGPOiDQstGL0L/QvtC70L3Rj9C10YjRjCDQt9Cw0LTQsNC90LjRjywg0LLQuNC00LjRiNGMINGA0L7RgdGCINC30LTQsNC90LjRjyDRgdCy0L7QtdC5INCz0YDRg9C/0L/Riywg0LLQvtC30LLRgNCw0YnQsNC10YjRjNGB0Y8g0LfQsCDRgdC70LXQtNGD0Y7RidC40Lwg0L/RgNC+0LPRgNC10YHRgdC+0LwKLSDQs9C40L/QvtGC0LXQt9CwOiDRh9GD0LLRgdGC0LLQviDRg9C/0YPRidC10L3QvdC+0Lkg0LLQvtC30LzQvtC20L3QvtGB0YLQuCDQv9GA0L7QtNCy0LjQvdGD0YLRjNGB0Y8g0LHRg9C00LXRgiDQvNC+0YLQuNCy0LjRgNC+0LLQsNGC0Ywg0LLQvtC30LLRgNCw0YnQsNGC0YzRgdGPIChGT01PLCDRgNC10YTQtdGA0LXQvdGBIOKAlCBCcmF3bCBTdGFycykKLSDQvdGD0LbQvdC+INC+0LHRgdGD0LTQuNGC0Ywg0YEgQ0VPINC4IENQTywg0LrQsNC60L7QtSDQv9C+0LLQtdC00LXQvdC40LUg0YXQvtGC0LjQvCDRg9GB0LjQu9C40YLRjCDQuCDQutCw0Log0L/QvtC50LzQtdC8LCDRh9GC0L4g0LPQvtGA0L7QtCDQv9C+0LzQvtCz0LDQtdGCCgoqKtC60LDQutC40Lwg0L7QsdGA0LDQt9C+0Lwg0L7RgtC+0LHRgNCw0LbQsNC10Lw/KioKCi0g0LrQsNC20LTQvtC1INC30LTQsNC90LjQtSDigJQg0L7QtNC90LAg0LPRgNGD0L/Qv9CwCgoqKtC60LDQuiDQsdGD0LTQtdGCINCy0YvQs9C70Y/QtNC10YLRjCDQvdCwINC80L7QvdC40YLQvtGA0LU/KioKCi0g0YHQu9Cw0LnQtNGLIC8g0LTQstC40LbRg9GJ0LDRj9GB0Y8g0LrQsNC80LXRgNCwINC/0L4g0LfQtNCw0L3QuNGP0LwKCioq0LrQsNC6INC30LTQsNC90LjQtSDQsdGD0LTQtdGCINGA0LDRgdGC0Lg/KioKCi0g0L/QviDRg9GH0LXQsdC90L7QuSDQsNC60YLQuNCy0L3QvtGB0YLQuCDQsiBMTVMKLSDQt9CwINC/0L7RgdC10YnQsNC10LzQvtGB0YLRjCDRgtC+0LbQtSDQtNC+0LvQttC90LAg0LHRi9GC0Ywg0L3QsNCz0YDQsNC00LAKLSDQvtC/0LvQsNGC0LAg0L3QsCDRgNC+0YHRgiDQt9C00LDQvdC40Y8g0L3QtSDQstC70LjRj9C10YIKCioq0LfQtNCw0L3QuNC1INCx0YPQtNC10YIg0YLQvtC70YzQutC+INGA0LDRgdGC0Lg/KioKLSDQtNCwLCDQv9C+0LrQsCDQvdC1INGD0LHQuNGA0LDQtdC8INGN0YLQsNC20LgKCioq0LPQtNC1INC/0L7QutCw0LfRi9Cy0LDQtdC8INC/0YDQsNCy0LjQu9CwINGA0L7RgdGC0LA/KioKCi0g0LIgTE1TINCw0LrQutCw0YPQvdGC0LUg0YHRgtGD0LTQtdC90YLQsAoKKirRh9GC0L4g0L/QvtC60LDQt9GL0LLQsNC10Lwg0L3QsCDQvtC00L3QvtC8INGB0LvQsNC50LTQtT8qKgoKLSDQvdCw0LfQstCw0L3QuNC1INCz0YDRg9C/0L/RiwotINC40LzRjyDQvNC10L3RgtC+0YDQsAotINGC0LXQutGD0YnQuNC5INGD0YDQvtCy0LXQvdGMIC8g0Y3RgtCw0LYKLSDQtNC10LvRjNGC0LAg0YDQvtGB0YLQsCDQvtGC0L3QvtGB0LjRgtC10LvRjNC90L4g0L/RgNC10LTRi9C00YPRidC10LPQviDQtNC90Y8gLyAg0L3QtdC00LXQu9C4ICgrMS8yLzMg0Y3RgtCw0LbQsCkKLSDQv9GA0LXQtNC70L7QttC10L3QuNC1OiDQvtGC0LTQtdC70YzQvdC+INC/0L7QutCw0LfRi9Cy0LDRgtGMINGN0YLQsNC20Lgg0LfQsCDRg9GH0LXQsdGDINC4INCx0L7QvdGD0YEg0LfQsCDQv9C+0YHQtdGJ0LDQtdC80L7RgdGC0YwKLSAz0LQg0LzQvtC00LXQu9GM0LrRgyDQvNC10L3RgtC+0YDQsCDQutC+0YLQvtGA0YvQuSDQutGA0YPRgtC40YLRgdGPINCy0L7QutGA0YPQsyDQt9C00LDQvdC40Y8gLyDQvdCwINC60YDRi9GI0LUg0LfQtNCw0L3QuNGPICjQtNC+0LTRg9C80LDRgtGMKQoKKirRh9GC0L4g0L/QvtC60LDQt9GL0LLQsNC10Lwg0L3QsCDQt9C00LDQvdC40Lg/KioKCi0gM9C0INC80L7QtNC10LvRjNC60YMg0LzQtdC90YLQvtGA0LAg0LrQvtGC0L7RgNGL0Lkg0LrRgNGD0YLQuNGC0YHRjyDQstC+0LrRgNGD0LMg0LfQtNCw0L3QuNGPIC8g0L3QsCDQutGA0YvRiNC1INC30LTQsNC90LjRjyAo0LTQvtC00YPQvNCw0YLRjCkKLSDRgtC10LzRgyDRg9GA0L7QutCwINC30LAg0LrQvtGC0L7RgNGD0Y4g0L/QvtC70YPRh9C40LvQuCDRjdGC0LDQtgotINGC0LXQvNGDINC/0L7RgdC70LXQtNC90LXQs9C+INGD0YDQvtC60LAg0LfQsCDQutC+0YLQvtGA0YPRjiDQv9C+0LvRg9GH0LDRgiDRjdGC0LDQtiAKCioq0YfRgtC+INGB0YfQuNGC0LDQtdC8INC+0LTQvdC40Lwg0YPRgNC+0LrQvtC8PyoqCgotIENsYXNzINCy0LrQu9GO0YfQsNC10YIg0LrQu9Cw0YHRgdC90YvQtSDQuCDQtNC+0LzQsNGI0L3QuNC1INGA0LDQsdC+0YLRiwoKKirQv9C+0YfQtdC80YMg0L3QtdC70YzQt9GPINC/0YDQvtGB0YLQviDRgdGH0LjRgtCw0YLRjCDQutC+0LvQuNGH0LXRgdGC0LLQviDQv9GA0LDQutGC0LjQuj8qKgotINC60YPRgNGBINGBINCx0L7Qu9GM0YjQuNC8INC60L7Qu9C40YfQtdGB0YLQstC+0Lwg0LfQsNC00LDQvdC40Lkg0LHRg9C00LXRgiDQtNCw0LLQsNGC0Ywg0LHQvtC70YzRiNC1INGN0YLQsNC20LXQuSDQuNC3LdC30LAg0YHRgtGA0YPQutGC0YPRgNGLINGD0YDQvtC60LAKLSDQvtC00LjQvSDRgtC10YHRgiDQuCDRgtC10YHRgiDRgSDRiNC10YHRgtGM0Y4g0L/RgNCw0LrRgtC40LrQsNC80Lgg0L3QtSDQvtCx0Y/Qt9Cw0YLQtdC70YzQvdC+INGC0YDQtdCx0YPRjtGCINC+0LTQuNC90LDQutC+0LLRi9GFINGD0YHQuNC70LjQuQotINC/0YDQuCDRjdGC0L7QvCDRgdC10LzRjCDQt9Cw0LTQsNC90LjQuSDQvdC1INC+0LfQvdCw0YfQsNGO0YIsINGH0YLQviDRg9GB0LjQu9C40Lkg0YDQvtCy0L3QviDQsiDRgdC10LzRjCDRgNCw0Lcg0LHQvtC70YzRiNC1CgoqKtGBINC60LDQutC40Lwg0YLQtdC80L/QvtC8INC30LTQsNC90LjQtSDRgNCw0YHRgtC10YI/KioKCi0g0LLQsNGA0LjQsNC90YLRizog0Y3RgtCw0LYg0LfQsCDQutCw0LbQtNC+0LUg0LfQsNC00LDQvdC40LUsINGN0YLQsNC2INC30LAg0YPRh9C10LHQvdGL0Lkg0Y3RgtCw0L8g0LjQu9C4INCx0LDQu9C70Ysg0YEg0YPRh9C10YLQvtC8INGB0LvQvtC20L3QvtGB0YLQuCDQt9Cw0LTQsNC90LjQuQotINC/0YDQtdC00LvQvtC20LXQvdC40LUg0LTQu9GPIE1WUDog0L7QtNC40L0g0LfQsNCy0LXRgNGI0LXQvdC90YvQuSDRg9GH0LXQsdC90YvQuSDRjdGC0LDQvyA9INC80LDQutGB0LjQvNGD0Lwg0L7QtNC40L0g0Y3RgtCw0LYKLSBDbGFzcyDQvNC+0LbQtdGCINCx0YvRgtGMINGC0LDQutC40Lwg0Y3RgtCw0L/QvtC8LCDQvdC+INGN0YLQviDQvdGD0LbQvdC+INC/0YDQvtCy0LXRgNC40YLRjCDQv9C+INC60LDQttC00L7QvNGDINC60YPRgNGB0YMKLSDQsdCw0LvQu9GLINGBINGD0YfQtdGC0L7QvCDRgdC70L7QttC90L7RgdGC0Lgg0L/QvtC60LAg0L7RgtC70L7QttC40YLRjDog0LjRhSDQv9GA0LjQtNC10YLRgdGPINC+0YbQtdC90LjQstCw0YLRjCDQuCDQvdCw0YHRgtGA0LDQuNCy0LDRgtGMCgoqKtGH0YLQviDQt9C90LDRh9C40YIg0LfQsNCy0LXRgNGI0LjRgtGMINGD0YfQtdCx0L3Ri9C5INGN0YLQsNC/PyoqCgotINC/0YDQtdC00LvQvtC20LXQvdC40LU6INCy0YvQv9C+0LvQvdC40YLRjCDQstGB0LUg0L7QsdGP0LfQsNGC0LXQu9GM0L3Ri9C1INGA0LDQsdC+0YLRiyDRjdGC0L7Qs9C+INGN0YLQsNC/0LAg0L/QviDQv9GA0LDQstC40LvQsNC8INC60YPRgNGB0LAKCS0gUm9ib3RleG5pa2E6INC/0YDQvtC50YLQuCDRgtC10YHRgiwg0LXRgdC70Lgg0L7QvSDQv9C+0LvQvdC+0YHRgtGM0Y4g0L/RgNC10LTRgdGC0LDQstC70Y/QtdGCINGA0LXQt9GD0LvRjNGC0LDRgiDRjdGC0LDQv9CwCgktIFdFQiBKdW5pb3I6INCy0YvQv9C+0LvQvdC40YLRjCDQvtCx0Y/Qt9Cw0YLQtdC70YzQvdGL0Lkg0YLQtdGB0YIg0Lgg0L/RgNCw0LrRgtC40LrQuCwg0LLQutC70Y7Rh9Cw0Y8g0LTQvtC80LDRiNC90Y7RjiDRgNCw0LHQvtGC0YMKCS0gQUkgU3RhcnR1cDog0L7RgtC00LXQu9GM0L3QviDQvtC/0YDQtdC00LXQu9C40YLRjCwg0LrQsNC6INC/0L7QtNGC0LLQtdGA0LbQtNCw0LXQvCDRgNC10LfRg9C70YzRgtCw0YIgSlNYLdGD0YDQvtC60LAKLSDQv9GA0L7RgdGC0L4g0L7RgtC60YDRi9GC0Ywg0LjQu9C4INC/0L7RgdC80L7RgtGA0LXRgtGMINGD0YDQvtC6INC90LXQtNC+0YHRgtCw0YLQvtGH0L3QviDigJQg0L/RgNC10LTQu9C+0LbQtdC90LjQtQotINC90YPQttC90L4g0L/RgNC+0LLQtdGA0LjRgtGMLCDQutCw0LrQuNC1INC/0L7QtNGC0LLQtdGA0LbQtNC10L3QuNGPINCy0YvQv9C+0LvQvdC10L3QuNGPINGD0LbQtSDQtdGB0YLRjCDQsiBMTVMKCioq0YfRgtC+INC00L7Qu9C20L3QviDQv9GA0L7QuNC30L7QudGC0LgsINGH0YLQvtCx0Ysg0LfQtNCw0L3QuNC1INCy0YvRgNC+0YHQu9C+INC90LAg0L7QtNC40L0g0Y3RgtCw0LY/KioKCi0g0LLQsNGA0LjQsNC90YLRiyDQv9C+0YDQvtCz0LA6INCy0YHQtSDRg9GH0LXQvdC40LrQuCwgOTAlLCA4MCUg0LjQu9C4IDcwJQotINC/0YDQtdC00LvQvtC20LXQvdC40LUg0LTQu9GPIE1WUDog0Y3RgtCw0L8g0LfQsNCy0LXRgNGI0LjQu9C4INC80LjQvdC40LzRg9C8IDgwJSDRg9GH0LXQvdC40LrQvtCyLCDQutC+0YLQvtGA0YvQvCDQvtC9INC90LDQt9C90LDRh9C10L0KLSA4MCUg4oCUINGN0YLQviDQtNC+0LvRjyDRg9GH0LXQvdC40LrQvtCyLCDQsCDQvdC1INC00L7Qu9GPINCy0YvQv9C+0LvQvdC10L3QvdGL0YUg0LfQsNC00LDQvdC40LkKLSDQutC+0LvQuNGH0LXRgdGC0LLQviDRg9GH0LXQvdC40LrQvtCyINC+0LrRgNGD0LPQu9GP0LXQvCDQstCy0LXRgNGFCgktINC40LcgNSDQvdGD0LbQvdGLIDQKCS0g0LjQtyA2INC90YPQttC90YsgNQoJLSDQuNC3IDcg0L3Rg9C20L3RiyA2CgktINC40LcgOCDQvdGD0LbQvdGLIDcKCS0g0LjQtyAxMCDQvdGD0LbQvdGLIDgKLSDQv9GA0LggOTAlINCyINCz0YDRg9C/0L/QsNGFINC40LcgNeKAkzgg0YfQtdC70L7QstC10Log0YTQsNC60YLQuNGH0LXRgdC60Lgg0L3Rg9C20L3RiyDQstGB0LUKLSA4MCUg0L/QvtC60LAg0LPQuNC/0L7RgtC10LfQsCwg0L3Rg9C20L3QviDQv9GA0L7QstC10YDQuNGC0YwsINC00L7RgdGC0LDRgtC+0YfQvdC+INC70Lgg0YfQsNGB0YLQviDQs9GA0YPQv9C/0Ysg0L/QvtC70YPRh9Cw0Y7RgiDRjdGC0LDQttC4CgoqKtGH0YLQviDQtNC10LvQsNGC0Ywg0YEg0L3QtdC30LDQstC10YDRiNC10L3QvdGL0LzQuCDRg9GA0L7QutCw0LzQuD8qKgoKLSDQv9GA0LXQtNC70L7QttC10L3QuNC1OiDQv9GA0L7RiNC70YvQuSDQvdC10LfQsNCy0LXRgNGI0LXQvdC90YvQuSDRjdGC0LDQvyDQvdC1INC80LXRiNCw0LXRgiDQv9C+0LvRg9GH0LjRgtGMINGN0YLQsNC2INC30LAg0YHQu9C10LTRg9GO0YnQuNC5Ci0g0L/RgNC+0L/Rg9GJ0LXQvdC90YvQuSDRjdGC0LDQvyDQvNC+0LbQvdC+INC30LDQstC10YDRiNC40YLRjCDQv9C+0LfQttC1Ci0g0L7QtNC40L0g0Y3RgtCw0L8g0LTQsNC10YIg0Y3RgtCw0LYg0YLQvtC70YzQutC+INC+0LTQuNC9INGA0LDQtwotINC/0L7Qu9GD0YfQtdC90L3Ri9C1INGN0YLQsNC20Lgg0L3QtSDRgdCz0L7RgNCw0Y7RggoKKirQutCw0Log0L/QvtC+0YnRgNGP0LXQvCDQv9C+0YHQtdGJ0LDQtdC80L7RgdGC0Yw/KioKCi0g0L7RgtC00LXQu9GM0L3QvtC5INC90LDQs9GA0LDQtNC+0LksINC60YDQvtC80LUg0Y3RgtCw0LbQtdC5INC30LAg0YPRh9C10LHQvdGL0LUg0LfQsNC00LDQvdC40Y8KLSDQstCw0YDQuNCw0L3RgjogKzEg0Y3RgtCw0LYg0LIg0LrQvtC90YbQtSDQvdC10LTQtdC70LgsINC10YHQu9C4INC/0L7RgdC10YnQsNC10LzQvtGB0YLRjCDQs9GA0YPQv9C/0Ysg0L3QtSDQvdC40LbQtSA5NSUKLSDQv9C+0YDQvtCzLCDQv9C10YDQuNC+0LQg0Lgg0YDQsNC30LzQtdGAINC90LDQs9GA0LDQtNGLINC/0L7QutCwINC90LUg0YPRgtCy0LXRgNC20LTQtdC90YsKCioq0LrQsNC6INGB0YfQuNGC0LDRgtGMINC/0L7RgdC10YnQsNC10LzQvtGB0YLRjD8qKgoKLSDQv9GA0LXQtNC70L7QttC10L3QuNC1OiDRhNCw0LrRgtC40YfQtdGB0LrQuNC1INC/0L7RgdC10YnQtdC90LjRjyAvINC+0LbQuNC00LDQtdC80YvQtSDQv9C+0YHQtdGJ0LXQvdC40Y8g0LfQsCDQv9GA0L7QstC10LTQtdC90L3Ri9C1INC30LDQvdGP0YLQuNGPINC90LXQtNC10LvQuAotINC/0YDQuNC80LXRgDogNSDRg9GH0LXQvdC40LrQvtCyINC4IDIg0LfQsNC90Y/RgtC40Y8gPSAxMCDQvtC20LjQtNCw0LXQvNGL0YUg0L/QvtGB0LXRidC10L3QuNC5Ci0g0L7QtNC40L0g0L/RgNC+0L/Rg9GB0Lo6IDkg0LjQtyAxMCA9IDkwJSwg0YLQviDQtdGB0YLRjCDQtNC70Y8g0L/QvtGA0L7Qs9CwIDk1JSDQvdGD0LbQvdGLINCy0YHQtSAxMAotINC/0YDQtdC00LvQvtC20LXQvdC40LU6INC+0YLQvNC10L3QtdC90L3Ri9C1INC30LDQvdGP0YLQuNGPINC90LUg0YPRh9C40YLRi9Cy0LDRgtGMLCDQtdGB0LvQuCDQt9Cw0L3Rj9GC0LjQuSDQvdC1INCx0YvQu9C+IOKAlCDQsdC+0L3Rg9GBINC90LUg0LLRi9C00LDQstCw0YLRjAotINC/0YDQtdC00LvQvtC20LXQvdC40LU6INC80LDQutGB0LjQvNGD0Lwg0L7QtNC40L0g0YLQsNC60L7QuSDQsdC+0L3Rg9GBINC30LAg0L3QtdC00LXQu9GOCi0g0L3Rg9C20L3QviDRgNC10YjQuNGC0YwsINC60LDQuiDRg9GH0LjRgtGL0LLQsNGC0Ywg0YPQstCw0LbQuNGC0LXQu9GM0L3Ri9C1INC/0YDQvtC/0YPRgdC60Lgg0Lgg0L/QvtC00YXQvtC00LjRgiDQu9C4IDk1JSDQvNCw0LvQtdC90YzQutC40Lwg0LPRgNGD0L/Qv9Cw0LwKCioq0LrQsNC6INGD0YfQuNGC0YvQstCw0LXQvCDQvtC/0LvQsNGC0YM/KioKCi0g0L3QsCDRjdGC0LDQttC4INC4INGB0LrQvtGA0L7RgdGC0Ywg0YDQvtGB0YLQsCDQvdC1INCy0LvQuNGP0LXRggoKCgoqKtC90YPQttC90L4g0LvQuCDRgNCw0LfQtNC10LvQtdC90LjQtSDQv9C+INGH0LXRgtC90YvQvCAvINC90LXRh9C10YLQvdGL0Lwg0LTQvdGP0Lw/KioKCi0g0LTQsAoKKirQvtGC0L7QsdGA0LDQttC10L3QuNC1INC/0YDQvtCz0YDQtdGB0YHQsCDRjdGC0LDQttCw0LzQuCDQvdC1INC00LDQtdGCINC/0L7Qu9C90L7Qs9C+INC/0L7QvdC40LzQsNC90LjRjyDRgtC10LrRg9GJ0LXQs9C+INC/0YDQvtCz0YDQtdGB0YHQsCDQt9C00LDQvdC40Y8sINC/0YDQvtCx0LvQtdC80LAg0LvQuCDRjdGC0L4/KioKCi0g0LTQsCwg0L/QvtC60LDQt9GL0LLQsNC10Lwg0YDRj9C00L7QvCDQs9GA0YPQv9C/0YssINC60L7RgtC+0YDRi9C1INCy0YvRgNC+0YHQu9C4INC90LAgMeKAkzIg0Y3RgtCw0LbQsAotIDHigJMyINC+0LfQvdCw0YfQsNC10YIg0L7QtNC40L0t0LTQstCwINGG0LXQu9GL0YUg0Y3RgtCw0LbQsCwg0L3QtSDQv9C+0LvQvtCy0LjQvdGDCi0g0L/RgNC10LTQu9C+0LbQtdC90LjQtTog0LTQvtC/0L7Qu9C90LjRgtC10LvRjNC90L4g0L/QvtC60LDQt9GL0LLQsNGC0YwsINGB0LrQvtC70YzQutC+INC+0YHRgtCw0LvQvtGB0Ywg0YHQstC+0LXQuSDQs9GA0YPQv9C/0LUg0LTQviDRgdC70LXQtNGD0Y7RidC10LPQviDRjdGC0LDQttCwCgktINC/0YDQuNC80LXRgDog0YHQtdC50YfQsNGBIDgg0Y3RgtCw0LbQtdC5LCDRgdC10LPQvtC00L3RjyArMQoJLSDRjdGC0LDQvyDQt9Cw0LLQtdGA0YjQuNC70LggNiDQuNC3IDgsINC00LvRjyDRjdGC0LDQttCwINC90YPQttC90YsgNyDQuNC3IDgKCS0g0L7RgdGC0LDQu9C+0YHRjCDQtdGJ0LUg0L7QtNC90L4g0LfQsNCy0LXRgNGI0LXQvdC40LUKCQoKKirQutCw0LrQvtC5INGB0YbQtdC90LDRgNC40Lkg0YHRgtGD0LTQtdC90YLQsCDQv9GA0LXQtNC/0L7Qu9Cw0LPQsNC10Lw/KioKCi0g0LLQsNGA0LjQsNC90YI6INGD0LLQuNC00LXQuyDQt9C00LDQvdC40LUg0LPRgNGD0L/Qv9GLIOKGkiDQv9C+0L3Rj9C7LCDRh9C10LPQviDQvdC1INGF0LLQsNGC0LDQtdGCINC00L4g0Y3RgtCw0LbQsCDihpIg0L7RgtC60YDRi9C7IExNUyDihpIg0LLRi9C/0L7Qu9C90LjQuyDQt9Cw0LTQsNC90LjQtSDihpIg0LPRgNGD0L/Qv9CwINC/0L7Qu9GD0YfQuNC70LAg0Y3RgtCw0LYsINC60L7Qs9C00LAg0LTQvtGB0YLQuNCz0LvQsCDQv9C+0YDQvtCz0LAKCioq0YfRgtC+INC+0LHRgdGD0LTQuNGC0Ywg0YEgQ0VPINC4IENQTz8qKgoKLSDQutCw0LrRg9GOINGG0LXQu9GMINGA0LXRiNCw0LXRgiDQs9C+0YDQvtC0INC4INC60LDQutC+0LUg0L/QvtCy0LXQtNC10L3QuNC1INGF0L7RgtC40Lwg0YPRgdC40LvQuNGC0Yw/Ci0g0L/QvtC00YXQvtC00LjRgiDQu9C4INC10LTQuNC90LjRhtCwIMKr0YPRh9C10LHQvdGL0Lkg0Y3RgtCw0L/CuyDRgSDRgNCw0LfQvdGL0LzQuCDRg9GB0LvQvtCy0LjRj9C80Lgg0L/QviDQutGD0YDRgdCw0Lw/Ci0g0YHRgNCw0LLQvdC40LLQsNC10Lwg0LPRgNGD0L/Qv9GLINCy0L3Rg9GC0YDQuCDQutGD0YDRgdCwINC40LvQuCDQtNC10LvQsNC10Lwg0YHQvtGA0LXQstC90L7QstCw0L3QuNC1INC80LXQttC00YMg0LrRg9GA0YHQsNC80Lg/Ci0g0L/QvtC00YXQvtC00LjRgiDQu9C4INC/0L7RgNC+0LMgODAlINC00LvRjyDQv9C40LvQvtGC0LA/Ci0g0LrQsNC60L7QuSDQsdC+0L3Rg9GBINC30LAg0L/QvtGB0LXRidCw0LXQvNC+0YHRgtGMINCy0YvQsdGA0LDRgtGMPwoKKirRh9GC0L4g0L/RgNC+0LLQtdGA0LjRgtGMINGBINCy0LvQsNC00LXQu9GM0YbQsNC80Lgg0LrRg9GA0YHQvtCyINC4INC/0L4gTE1TPyoqCgotINC60LDQutC40LUg0YDQsNCx0L7RgtGLINC+0LHRj9C30LDRgtC10LvRjNC90Ysg0LTQu9GPINC30LDQstC10YDRiNC10L3QuNGPINGN0YLQsNC/0LAg0L3QsCDQutCw0LbQtNC+0Lwg0LrRg9GA0YHQtT8KLSDQutCw0Log0YTQuNC60YHQuNGA0YPQtdGC0YHRjyDQstGL0L/QvtC70L3QtdC90LjQtSDRgtC10YHRgtC+0LIsINC/0YDQsNC60YLQuNC6INC4IEpTWC3Rg9GA0L7QutC+0LI/Ci0g0LrQsNC6INGD0YfQuNGC0YvQstCw0YLRjCDQv9C10YDQtdCy0L7QtNGLLCDQt9Cw0LzQvtGA0L7Qt9C60Lgg0Lgg0YHQvtGB0YLQsNCyINGD0YfQtdC90LjQutC+0LIg0LTQu9GPINGA0LDRgdGH0LXRgtCwPwotINCx0YPQtNC10YIg0LvQuCDRgtC10LzQvyDRgNC+0YHRgtCwINC/0YDQuNC10LzQu9C10LzRi9C8INC90LAg0LrQsNC20LTQvtC8INC60YPRgNGB0LU/CgoqKtC60LDQuiDQv9GA0L7QstC10YDQuNC8LCDRh9GC0L4g0LzQtdGF0LDQvdC40LrQsCDRgNCw0LHQvtGC0LDQtdGCPyoqCgotINC/0YDQtdC00LvQvtC20LXQvdC40LU6INGB0LzQvtGC0YDQtdGC0Ywg0LTQvtC70Y4g0LfQsNCy0LXRgNGI0LjQstGI0LjRhSDRjdGC0LDQvywg0LLRgNC10LzRjyDQtNC+INC90L7QstC+0LPQviDRjdGC0LDQttCwINC4INC00L7Qu9GOINCz0YDRg9C/0L8g0LHQtdC3INGA0L7RgdGC0LAKLSDRgdC80L7RgtGA0LXRgtGMINC+0YLQtNC10LvRjNC90L4g0L/QviDQutGD0YDRgdCw0LwsINGBINGD0YfQtdGC0L7QvCDRgNCw0YHQv9C40YHQsNC90LjRjyDQuCDRgdC+0YHRgtCw0LLQsCDQs9GA0YPQv9C/Ci0g0LrRgNC40YLQtdGA0LjQuCDRg9GB0L/QtdGF0LAg0L3Rg9C20L3QviDRgdC+0LPQu9Cw0YHQvtCy0LDRgtGMCgoqKtC/0LDRgdGF0LDQu9C60LAg0LIg0LLQuNC00LUg0L7Qs9GA0L7QvNC90L7QuSAz0LQg0LzQvtC00LXQu9C4INGBINC80L7QtdC5INCz0L7Qu9C+0LLQvtC5INC60L7RgtC+0YDRi9C5INCx0YPQtNC10YIg0LTQtdC70LDRgtGMINGH0YLQviDRgtC+KioKCioq0LrQtdC50YE6INC90L7QstCw0Y8g0LPRgNGD0L/Qv9CwINGD0LbQtSDQv9C+0LvRg9GH0LDQu9CwINGN0YLQsNC2INC30LAg0YLQtdC80YMgQSwg0YMg0L3QvtCy0L7Qs9C+INGD0YfQtdC90LjQutCwINGN0YLQvtGCINGD0YDQvtC6INC90LUg0LLRi9C/0L7Qu9C90LXQvSAtINGN0YLQsNC2INGDINC90L7QstC+0Lkg0LPRgNGD0L/Qv9GLINC90LUg0LjRgdGH0LXQt9Cw0LXRgi4g0YLQvtGCINC20LUg0LrQtdC50YEg0YLQvtC70YzQutC+INGDINCz0YDRg9C/0L/RiyDRjdGC0LDQttCwINC30LAg0YLQtdC80YMg0L3QtdGCIC0g0L3QvtCy0YvQuSDRg9GH0LXQvdC40Log0YLQvtC20LUg0LTQvtC70LbQtdC9INCy0YvQv9C+0LvQvdC40YLRjCoqID09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09CtC60LXQudGBINGC0L7RgiDQttC1INGB0LDQvNGL0Lkg0YLQvtC70YzQutC+INGC0LXQv9C10YDRjCDRgyDRg9GH0LXQvdC40LrQsCDRg9GA0L7QuiDQt9CwINGC0LXQvNGDINCy0YvQv9C+0LvQvdC10L0g0LAg0Y3RgtCw0LbQsCDRgyDQs9GA0YPQv9C/0Ysg0L3QtdGCCg==</script>
+
+
+<script type="module">
+(async function() {
+	// mermaid sources travel base64-encoded in data-mmd; render with the LATEST mermaid
+	if (document.getElementById('encrypted-data') && !window.__cmdsReady) {
+		await new Promise(function(r) { document.addEventListener('cmds-content-ready', r, { once: true }); });
+	}
+	var containers = Array.from(document.querySelectorAll('.mermaid-container[data-mmd]'));
+	if (!containers.length) return;
+	function decode(b64) {
+		var bin = atob(b64); var bytes = new Uint8Array(bin.length);
+		for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+		return new TextDecoder().decode(bytes);
+	}
+	var sources = containers.map(function(d) { return decode(d.getAttribute('data-mmd')); });
+	var mermaid;
+	try {
+		mermaid = (await import('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs')).default;
+	} catch (e) {
+		containers.forEach(function(d, i) {
+			var pre = document.createElement('pre');
+			pre.textContent = sources[i];
+			d.replaceWith(pre);
+		});
+		return;
+	}
+	var seq = 0;
+	async function renderAll() {
+		var dark = document.documentElement.dataset.theme === 'dark';
+		mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'neutral', securityLevel: 'strict' });
+		for (var i = 0; i < containers.length; i++) {
+			try {
+				var out = await mermaid.render('cmds-mmd-' + i + '-' + (seq++), sources[i]);
+				containers[i].innerHTML = out.svg;
+			} catch (e) {
+				var pre = document.createElement('pre');
+				pre.textContent = sources[i];
+				containers[i].innerHTML = '';
+				containers[i].appendChild(pre);
+			}
+		}
+	}
+	await renderAll();
+	new MutationObserver(function() { renderAll(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+})();
+</script>
+
+
+<script>
+(function() {
+	var icon = document.getElementById('themeIcon');
+	var SUN = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+	var MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+	function paint(theme) {
+		if (icon) icon.innerHTML = theme === 'dark' ? MOON : SUN;
+	}
+	var btn = document.getElementById('themeToggle');
+	if (btn) btn.addEventListener('click', function() {
+		var next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+		document.documentElement.dataset.theme = next;
+		try { localStorage.setItem('cmds-theme', next); } catch(e) {}
+		paint(next);
+	});
+	paint(document.documentElement.dataset.theme || 'light');
+})();
+</script>
+
+<script>
+(function() {
+	var badge = document.getElementById('expiryBadge');
+	if (!badge) return;
+	var ts = Number(badge.getAttribute('data-expires'));
+	if (!ts) return;
+	var ko = badge.getAttribute('data-lang') === 'ko';
+	var text = document.getElementById('expiryText');
+	function render() {
+		var msLeft = ts - Date.now();
+		var d = new Date(ts);
+		var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+		if (msLeft <= 0) {
+			text.textContent = ko ? '만료됨' : 'Expired';
+			badge.classList.add('b-expired');
+			// file-hosting backends (GitHub Pages, NAS…) have no server to
+			// 410 an expired share — hide the body here as a soft tombstone
+			var body = document.getElementById('note-content');
+			if (body && !body.dataset.tombstoned) {
+				body.dataset.tombstoned = '1';
+				body.innerHTML = '<p class="cmds-loading">' + (ko ? '이 공유는 만료되었습니다.' : 'This shared note has expired.') + '</p>';
+				var toc = document.getElementById('tocToggle'); if (toc) toc.hidden = true;
+				['mdCopy', 'mdDownload'].forEach(function(id) { var b = document.getElementById(id); if (b) b.hidden = true; });
+			}
+		} else {
+			// calendar-date diff, so "D-1" flips at midnight, not at share-time+24h
+			var now = new Date();
+			var days = Math.round(
+				(new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime() -
+				 new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime()) / 86400000
+			);
+			var count = days <= 0 ? (ko ? '오늘 만료' : 'expires today') : 'D-' + days;
+			text.textContent = (ko ? dateStr + ' 만료 · ' : 'Expires ' + dateStr + ' · ') + count;
+			if (days <= 3) badge.classList.add('b-soon');
+		}
+		badge.hidden = false;
+	}
+	render();
+	// keep honest across long-lived tabs (midnight rollover)
+	setInterval(render, 60 * 60 * 1000);
+})();
+</script>
+
+
+<script>
+(function() {
+	var PANELS = { toc: 'tocPanel', graph: 'graphPanel' };
+	var hasToc = false, hasGraph = false;
+
+	function docked() { return document.body.classList.contains('cmds-docked'); }
+
+	function setPanel(name, open) {
+		Object.keys(PANELS).forEach(function(k) {
+			var on = k === name ? open : false;
+			document.getElementById(PANELS[k]).classList.toggle('open', on);
+			document.getElementById(k + 'Toggle').classList.toggle('active', on);
+			try { localStorage.setItem('cmds-panel-' + k, on ? '1' : '0'); } catch(e) {}
+		});
+		if (name === 'graph' && open) requestAnimationFrame(function() { relayoutGraph(); });
+	}
+	function wireToggle(name) {
+		document.getElementById(name + 'Toggle').addEventListener('click', function() {
+			var isOpen = document.getElementById(PANELS[name]).classList.contains('open');
+			setPanel(name, !isOpen);
+		});
+	}
+
+	function setDock(on) {
+		if (on && window.innerWidth <= 1100) on = false;
+		var dock = document.getElementById('sideDock');
+		var toc = document.getElementById('tocPanel');
+		var graph = document.getElementById('graphPanel');
+		document.body.classList.toggle('cmds-docked', on);
+		if (on) {
+			Object.keys(PANELS).forEach(function(k) {
+				document.getElementById(PANELS[k]).classList.remove('open');
+				document.getElementById(k + 'Toggle').classList.remove('active');
+			});
+			if (hasToc) dock.appendChild(toc);
+			if (hasGraph) dock.appendChild(graph);
+			dock.hidden = false;
+		} else {
+			dock.hidden = true;
+			document.body.appendChild(toc);
+			document.body.appendChild(graph);
+		}
+		try { localStorage.setItem('cmds-dock', on ? '1' : '0'); } catch(e) {}
+		if (hasGraph) requestAnimationFrame(function() { relayoutGraph(); });
+	}
+
+	function headings() {
+		// headings inside canvas cards are card content, not document structure
+		return Array.prototype.filter.call(
+			document.querySelectorAll('#note-content h1, #note-content h2, #note-content h3, #note-content h4'),
+			function(h) { return !h.closest('.cmds-canvas'); }
+		);
+	}
+
+	function assignHeadingIds() {
+		var used = {};
+		headings().forEach(function(h) {
+			var text = (h.textContent || '').trim();
+			if (!text || h.id) return;
+			var slug = text.toLowerCase().replace(/[^0-9a-z\uAC00-\uD7A3\u3131-\u318E\s-]/g, '').replace(/\s+/g, '-') || 'section';
+			if (used[slug] != null) { used[slug]++; slug = slug + '-' + used[slug]; } else { used[slug] = 0; }
+			h.id = slug;
+		});
+	}
+
+	function buildToc() {
+		var list = document.getElementById('tocList');
+		list.innerHTML = '';
+		headings().forEach(function(h) {
+			var text = (h.textContent || '').trim();
+			if (!text || !h.id) return;
+			var a = document.createElement('a');
+			a.href = '#' + h.id;
+			a.textContent = text;
+			a.className = 'toc-' + h.tagName.toLowerCase();
+			a.title = text;
+			list.appendChild(a);
+		});
+		return list.children.length >= 2;
+	}
+
+	// highlight the section currently in view (and keep it visible in a scrolling TOC)
+	function scrollSpy() {
+		var links = document.querySelectorAll('#tocList a');
+		if (!links.length) return;
+		var map = {};
+		links.forEach(function(a) { map[decodeURIComponent(a.hash.slice(1))] = a; });
+		var obs = new IntersectionObserver(function(entries) {
+			entries.forEach(function(en) {
+				if (!en.isIntersecting) return;
+				links.forEach(function(a) { a.classList.remove('active'); });
+				var a = map[en.target.id];
+				if (a) {
+					a.classList.add('active');
+					if (a.scrollIntoView) a.scrollIntoView({ block: 'nearest' });
+				}
+			});
+		}, { rootMargin: '0px 0px -75% 0px' });
+		headings().forEach(function(h) { if (h.id) obs.observe(h); });
+	}
+
+	var ICON_COPY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h8A2.5 2.5 0 0 1 15 4.5V5"/></svg>';
+	var ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+	var ICON_LINK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+
+	function enhanceCodeBlocks() {
+		document.querySelectorAll('#note-content pre').forEach(function(pre) {
+			if (pre.querySelector('.code-copy')) return;
+			var code = pre.querySelector('code');
+			var langMatch = ((code ? code.className : '') + ' ' + pre.className).match(/language-([a-z0-9+#-]+)/i);
+			if (langMatch && langMatch[1] !== 'undefined') pre.setAttribute('data-lang', langMatch[1]);
+			var btn = document.createElement('button');
+			btn.className = 'code-copy';
+			btn.setAttribute('aria-label', 'Copy code');
+			btn.innerHTML = ICON_COPY;
+			btn.addEventListener('click', function() {
+				var code = pre.querySelector('code');
+				var textToCopy = (code || pre).innerText.replace(/\n$/, '');
+				navigator.clipboard.writeText(textToCopy).then(function() {
+					btn.innerHTML = ICON_CHECK;
+					btn.classList.add('copied');
+					setTimeout(function() { btn.innerHTML = ICON_COPY; btn.classList.remove('copied'); }, 1500);
+				});
+			});
+			pre.appendChild(btn);
+		});
+	}
+
+	// foldable callouts ("> [!tip]-") render collapsed with inline display:none
+	function foldableCallouts() {
+		document.querySelectorAll('#note-content .callout.is-collapsible > .callout-title').forEach(function(title) {
+			if (title.dataset.cmdsFold) return;
+			title.dataset.cmdsFold = '1';
+			title.addEventListener('click', function() {
+				var callout = title.parentElement;
+				var content = callout.querySelector(':scope > .callout-content');
+				var collapsed = callout.classList.toggle('is-collapsed');
+				if (content) content.style.display = collapsed ? 'none' : '';
+				var fold = title.querySelector('.callout-fold');
+				if (fold) fold.classList.toggle('is-collapsed', collapsed);
+			});
+		});
+	}
+
+	// hover link icon on headings — click copies the deep link
+	function headingAnchors() {
+		headings().forEach(function(h) {
+			if (!h.id || h.querySelector('.h-anchor')) return;
+			var a = document.createElement('a');
+			a.className = 'h-anchor';
+			a.href = '#' + h.id;
+			a.setAttribute('aria-label', 'Copy link to section');
+			a.innerHTML = ICON_LINK;
+			a.addEventListener('click', function(e) {
+				e.preventDefault();
+				history.replaceState(null, '', '#' + h.id);
+				try { navigator.clipboard.writeText(location.href.split('#')[0] + '#' + h.id); } catch(err) {}
+				h.scrollIntoView({ behavior: 'smooth' });
+			});
+			h.appendChild(a);
+		});
+	}
+
+	// ══════════ markdown source tools (copy / download) ══════════
+	function mdSource() {
+		if (window.__cmdsMd != null) return window.__cmdsMd; // decrypted payload
+		var el = document.getElementById('md-source');
+		if (!el) return null;
+		try {
+			var bin = atob(el.textContent.trim());
+			var bytes = new Uint8Array(bin.length);
+			for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+			return new TextDecoder().decode(bytes);
+		} catch(e) { return null; }
+	}
+
+	function wireMdTools() {
+		var md = mdSource();
+		if (md == null) return;
+		var copyBtn = document.getElementById('mdCopy');
+		var dlBtn = document.getElementById('mdDownload');
+		if (copyBtn) {
+			copyBtn.hidden = false;
+			var idle = copyBtn.innerHTML;
+			copyBtn.addEventListener('click', function() {
+				navigator.clipboard.writeText(md).then(function() {
+					copyBtn.innerHTML = ICON_CHECK;
+					copyBtn.classList.add('active');
+					setTimeout(function() { copyBtn.innerHTML = idle; copyBtn.classList.remove('active'); }, 1500);
+				});
+			});
+		}
+		if (dlBtn) {
+			dlBtn.hidden = false;
+			dlBtn.addEventListener('click', function() {
+				var name = (document.title || 'note').replace(/[\\/:*?"<>|]/g, '-').trim() || 'note';
+				var blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+				var url = URL.createObjectURL(blob);
+				var a = document.createElement('a');
+				a.href = url;
+				a.download = name + '.md';
+				document.body.appendChild(a);
+				a.click();
+				a.remove();
+				setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+			});
+		}
+	}
+
+	// ══════════ interactive force-directed local graph ══════════
+	var G = null; // { data, pts, adj, deg, W, H, k, tx, ty, hover }
+
+	function readGraphData() {
+		var dataEl = document.getElementById('graph-data');
+		if (!dataEl) return null;
+		var g;
+		try { g = JSON.parse(dataEl.textContent); } catch(e) { return null; }
+		if (!g.nodes || g.nodes.length < 2) return null;
+		return g;
+	}
+
+	function runLayout(g, W, H) {
+		var N = g.nodes.length;
+		var pts = g.nodes.map(function(n, i) {
+			var a = i * 2.399963;
+			var r = n.level === 0 ? 0 : (n.level === 1 ? 0.35 : 0.7) * Math.min(W, H) / 2;
+			return { x: W / 2 + r * Math.cos(a), y: H / 2 + r * Math.sin(a), vx: 0, vy: 0 };
+		});
+		var SPRING = 0.03, REST = Math.min(W, H) / 3.2, REPEL = Math.min(W, H) * 55, GRAV = 0.008;
+		for (var it = 0; it < 300; it++) {
+			var damp = 0.85 * (1 - it / 340);
+			for (var i = 0; i < N; i++) {
+				for (var j = i + 1; j < N; j++) {
+					var dx = pts[j].x - pts[i].x, dy = pts[j].y - pts[i].y;
+					var d2 = dx * dx + dy * dy + 0.01, d = Math.sqrt(d2);
+					var f = Math.min(REPEL / d2, 8);
+					var fx = (dx / d) * f, fy = (dy / d) * f;
+					pts[i].vx -= fx; pts[i].vy -= fy;
+					pts[j].vx += fx; pts[j].vy += fy;
+				}
+			}
+			g.edges.forEach(function(e) {
+				var a = pts[e[0]], b = pts[e[1]];
+				var dx = b.x - a.x, dy = b.y - a.y;
+				var d = Math.sqrt(dx * dx + dy * dy) + 0.01;
+				var f = SPRING * (d - REST);
+				var fx = (dx / d) * f, fy = (dy / d) * f;
+				a.vx += fx; a.vy += fy;
+				b.vx -= fx; b.vy -= fy;
+			});
+			for (var k2 = 0; k2 < N; k2++) {
+				pts[k2].vx += (W / 2 - pts[k2].x) * GRAV;
+				pts[k2].vy += (H / 2 - pts[k2].y) * GRAV;
+				pts[k2].x += pts[k2].vx * damp;
+				pts[k2].y += pts[k2].vy * damp;
+				pts[k2].vx *= 0.6; pts[k2].vy *= 0.6;
+			}
+			pts[0].x = W / 2; pts[0].y = H / 2; pts[0].vx = 0; pts[0].vy = 0;
+		}
+		var minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+		pts.forEach(function(pt) {
+			minX = Math.min(minX, pt.x); maxX = Math.max(maxX, pt.x);
+			minY = Math.min(minY, pt.y); maxY = Math.max(maxY, pt.y);
+		});
+		var M = 30;
+		var sx = (W - M * 2) / Math.max(maxX - minX, 1), sy = (H - M * 2) / Math.max(maxY - minY, 1);
+		var sc = Math.min(sx, sy, 1.5);
+		pts.forEach(function(pt) {
+			pt.x = M + (pt.x - minX) * sc + (W - M * 2 - (maxX - minX) * sc) / 2;
+			pt.y = M + (pt.y - minY) * sc + (H - M * 2 - (maxY - minY) * sc) / 2;
+		});
+		return pts;
+	}
+
+	function canvasSize() {
+		var canvas = document.getElementById('graphCanvas');
+		var panel = document.getElementById('graphPanel');
+		var wasHidden = !panel.classList.contains('open') && !docked();
+		if (wasHidden) { panel.style.visibility = 'hidden'; panel.classList.add('open'); }
+		var W = Math.max(canvas.clientWidth || panel.clientWidth - 36, 200);
+		var H = docked() ? Math.max(canvas.clientHeight, 200) : 280;
+		if (wasHidden) { panel.classList.remove('open'); panel.style.visibility = ''; }
+		return { W: W, H: H };
+	}
+
+	function relayoutGraph() {
+		var data = G ? G.data : readGraphData();
+		if (!data) return;
+		var sz = canvasSize();
+		var adj = data.nodes.map(function() { return {}; });
+		var deg = data.nodes.map(function() { return 0; });
+		data.edges.forEach(function(e) {
+			adj[e[0]][e[1]] = true; adj[e[1]][e[0]] = true;
+			deg[e[0]]++; deg[e[1]]++;
+		});
+		G = {
+			data: data, adj: adj, deg: deg,
+			pts: runLayout(data, sz.W, sz.H),
+			W: sz.W, H: sz.H, k: 1, tx: 0, ty: 0, hover: -1,
+		};
+		renderGraph();
+	}
+
+	function renderGraph() {
+		if (!G) return;
+		var canvas = document.getElementById('graphCanvas');
+		var dpr = window.devicePixelRatio || 1;
+		canvas.width = G.W * dpr; canvas.height = G.H * dpr;
+		if (!docked()) canvas.style.height = G.H + 'px';
+		var ctx = canvas.getContext('2d');
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+		ctx.clearRect(0, 0, G.W, G.H);
+
+		var css = getComputedStyle(document.documentElement);
+		var noteColor = css.getPropertyValue('--graph-note').trim() || css.getPropertyValue('--accent').trim();
+		var muted = css.getPropertyValue('--muted').trim();
+		var text = css.getPropertyValue('--text').trim();
+		var border = css.getPropertyValue('--border').trim();
+		var cardBg = css.getPropertyValue('--card-bg').trim();
+
+		var g = G.data, pts = G.pts, k = G.k, hover = G.hover;
+		var sx = function(pt) { return pt.x * k + G.tx; };
+		var sy = function(pt) { return pt.y * k + G.ty; };
+		var inHood = function(i) { return hover < 0 || i === hover || G.adj[hover][i]; };
+
+		g.edges.forEach(function(e) {
+			var touches = hover >= 0 && (e[0] === hover || e[1] === hover);
+			if (hover >= 0) {
+				ctx.globalAlpha = touches ? 0.95 : 0.08;
+				ctx.strokeStyle = touches ? muted : border;
+				ctx.lineWidth = touches ? 1.5 : 1;
+			} else {
+				ctx.globalAlpha = (g.nodes[e[0]].level === 2 || g.nodes[e[1]].level === 2) ? 0.45 : 0.8;
+				ctx.strokeStyle = border;
+				ctx.lineWidth = 1;
+			}
+			ctx.beginPath();
+			ctx.moveTo(sx(pts[e[0]]), sy(pts[e[0]]));
+			ctx.lineTo(sx(pts[e[1]]), sy(pts[e[1]]));
+			ctx.stroke();
+		});
+
+		var rOf = function(i) {
+			var base = i === 0 ? 7 : Math.min(3.2 + G.deg[i] * 0.6, 6.5);
+			return base * Math.pow(k, 0.75);
+		};
+		g.nodes.forEach(function(n, i) {
+			var dim = hover >= 0 ? (inHood(i) ? 1 : 0.14) : (n.level === 2 ? 0.65 : 1);
+			ctx.globalAlpha = dim;
+			ctx.fillStyle = n.type === 'tag' ? '#E985A2' : noteColor;
+			ctx.beginPath(); ctx.arc(sx(pts[i]), sy(pts[i]), rOf(i), 0, Math.PI * 2); ctx.fill();
+			if (i === hover) {
+				ctx.strokeStyle = text; ctx.lineWidth = 1.5;
+				ctx.beginPath(); ctx.arc(sx(pts[i]), sy(pts[i]), rOf(i) + 2.5, 0, Math.PI * 2); ctx.stroke();
+			}
+		});
+
+		// labels: center always; L1 at normal zoom; everything once zoomed in;
+		// hovering shows the whole neighborhood regardless of zoom
+		g.nodes.forEach(function(n, i) {
+			var show;
+			if (hover >= 0) show = inHood(i);
+			else show = i === 0 || (n.level === 1 && (k >= 1.05 || g.nodes.length <= 20)) || k >= 1.9 || g.nodes.length <= 12;
+			if (!show) return;
+			var fs = i === 0 || i === hover ? 11.5 : 10.5;
+			ctx.font = (i === 0 || i === hover ? 'bold ' : '') + fs + 'px -apple-system, sans-serif';
+			var label = n.label.length > 22 ? n.label.slice(0, 21) + '…' : n.label;
+			var tw = ctx.measureText(label).width;
+			var lx = Math.max(2, Math.min(G.W - tw - 2, sx(pts[i]) - tw / 2));
+			var ly = sy(pts[i]) + rOf(i) + fs + 2;
+			var alpha = hover >= 0 ? (inHood(i) ? 1 : 0) : (n.level === 2 && k < 2 ? 0.7 : 0.95);
+			ctx.globalAlpha = alpha * 0.8;
+			ctx.fillStyle = cardBg;
+			ctx.fillRect(lx - 3, ly - fs + 1, tw + 6, fs + 3);
+			ctx.globalAlpha = alpha;
+			ctx.fillStyle = i === 0 || i === hover ? text : muted;
+			ctx.fillText(label, lx, ly);
+		});
+		ctx.globalAlpha = 1;
+	}
+
+	function zoomBy(factor) {
+		if (!G) return;
+		var mx = G.W / 2, my = G.H / 2;
+		var nk = Math.max(0.35, Math.min(4.5, G.k * factor));
+		factor = nk / G.k;
+		G.tx = mx - (mx - G.tx) * factor;
+		G.ty = my - (my - G.ty) * factor;
+		G.k = nk;
+		renderGraph();
+	}
+
+	function wireGraphInteraction() {
+		var canvas = document.getElementById('graphCanvas');
+		var dragging = false, moved = false, lastX = 0, lastY = 0;
+
+		document.getElementById('gZoomIn').addEventListener('click', function() { zoomBy(1.35); });
+		document.getElementById('gZoomOut').addEventListener('click', function() { zoomBy(1 / 1.35); });
+		document.getElementById('gReset').addEventListener('click', function() {
+			if (G) { G.k = 1; G.tx = 0; G.ty = 0; renderGraph(); }
+		});
+
+		function pick(mx, my) {
+			if (!G) return -1;
+			var best = -1, bestD = 12 * 12;
+			G.pts.forEach(function(pt, i) {
+				var dx = pt.x * G.k + G.tx - mx, dy = pt.y * G.k + G.ty - my;
+				var d = dx * dx + dy * dy;
+				if (d < bestD) { bestD = d; best = i; }
+			});
+			return best;
+		}
+		function pos(e) {
+			var r = canvas.getBoundingClientRect();
+			return { x: e.clientX - r.left, y: e.clientY - r.top };
+		}
+
+		canvas.addEventListener('wheel', function(e) {
+			if (!G) return;
+			e.preventDefault();
+			var m = pos(e);
+			var factor = Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.002));
+			var nk = Math.max(0.35, Math.min(4.5, G.k * factor));
+			factor = nk / G.k;
+			G.tx = m.x - (m.x - G.tx) * factor;
+			G.ty = m.y - (m.y - G.ty) * factor;
+			G.k = nk;
+			renderGraph();
+		}, { passive: false });
+
+		canvas.addEventListener('pointerdown', function(e) {
+			if (!G) return;
+			dragging = true; moved = false;
+			lastX = e.clientX; lastY = e.clientY;
+			canvas.classList.add('dragging');
+			canvas.setPointerCapture(e.pointerId);
+		});
+		canvas.addEventListener('pointermove', function(e) {
+			if (!G) return;
+			if (dragging) {
+				var dx = e.clientX - lastX, dy = e.clientY - lastY;
+				if (Math.abs(dx) + Math.abs(dy) > 2) moved = true;
+				G.tx += dx; G.ty += dy;
+				lastX = e.clientX; lastY = e.clientY;
+				renderGraph();
+			} else {
+				var m = pos(e);
+				var h = pick(m.x, m.y);
+				canvas.classList.toggle('on-node', h >= 0);
+				if (h !== G.hover) { G.hover = h; renderGraph(); }
+			}
+		});
+		canvas.addEventListener('pointerup', function(e) {
+			dragging = false;
+			canvas.classList.remove('dragging');
+			// double-click-ish: a clean click on empty space resets the view
+			if (!moved) {
+				var m = pos(e);
+				if (pick(m.x, m.y) < 0 && G.k !== 1) { G.k = 1; G.tx = 0; G.ty = 0; renderGraph(); }
+			}
+		});
+		canvas.addEventListener('pointerleave', function() {
+			if (G && G.hover !== -1) { G.hover = -1; renderGraph(); }
+			canvas.classList.remove('on-node');
+		});
+	}
+
+	function init() {
+		// start from a known-clean panel state before restoring preferences
+		document.body.classList.remove('cmds-docked');
+		document.getElementById('sideDock').hidden = true;
+		assignHeadingIds();
+		enhanceCodeBlocks();
+		headingAnchors();
+		foldableCallouts();
+		wireMdTools();
+		hasToc = buildToc();
+		if (hasToc) {
+			document.getElementById('tocToggle').hidden = false;
+			wireToggle('toc');
+			scrollSpy();
+		}
+		hasGraph = !!readGraphData();
+		if (hasGraph) {
+			document.getElementById('graphToggle').hidden = false;
+			wireToggle('graph');
+			wireGraphInteraction();
+			new MutationObserver(function() { renderGraph(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+			window.addEventListener('resize', function() {
+				if (docked() && window.innerWidth <= 1100) { setDock(false); return; }
+				if (docked()) requestAnimationFrame(function() { relayoutGraph(); });
+			});
+		}
+		if (hasToc || hasGraph) {
+			document.querySelectorAll('[data-pin]').forEach(function(btn) {
+				btn.addEventListener('click', function() { setDock(!docked()); });
+			});
+			// floating popups close on any click outside the card (docked stays put)
+			document.addEventListener('pointerdown', function(e) {
+				if (docked()) return;
+				if (e.target.closest('.side-panel, .side-tools')) return;
+				Object.keys(PANELS).forEach(function(k) {
+					if (document.getElementById(PANELS[k]).classList.contains('open')) setPanel(k, false);
+				});
+			});
+		}
+		try {
+			if (localStorage.getItem('cmds-dock') === '1' && (hasToc || hasGraph)) {
+				setDock(true);
+			} else if (localStorage.getItem('cmds-panel-toc') === '1' && hasToc) setPanel('toc', true);
+			else if (localStorage.getItem('cmds-panel-graph') === '1' && hasGraph) setPanel('graph', true);
+		} catch(e) {}
+	}
+
+	if (document.getElementById('encrypted-data') && !window.__cmdsReady) {
+		document.addEventListener('cmds-content-ready', init, { once: true });
+	} else {
+		init();
+	}
+})();
+</script>
+
+
+
+</body>
+</html>
